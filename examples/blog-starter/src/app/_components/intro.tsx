@@ -1,22 +1,40 @@
-export default function Intro() {
+export function Intro() {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
-      <h1 className="text-6xl md:text-7xl font-bold tracking-tighter leading-tight md:pr-8">
-        Ohpal
+    <section
+      style={{
+        backgroundImage: "url('/background.jpg')", // we'll upload this next
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        color: 'white',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontFamily: "'Playfair Display', serif"
+      }}
+    >
+      <h1 style={{ fontSize: '4rem', marginBottom: '0.5rem', letterSpacing: '2px' }}>
+        OHPAL
       </h1>
-
-      <div className="flex flex-col gap-3 text-lg">
-        <p className="max-w-xl">
-          Logistics, care, travel, and community under one roof.
-        </p>
-
-        <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <a href="/sapphiracare" className="underline text-blue-600 hover:text-blue-800">💎 SapphiraCare</a>
-          <a href="/carneliana" className="underline text-red-600 hover:text-red-800">🔥 Carneliana</a>
-          <a href="/peridotrepid" className="underline text-green-600 hover:text-green-800">🚢 Peridotrepid</a>
-          <a href="/citrinoor" className="underline text-yellow-600 hover:text-yellow-800">🌍 Citrinoor</a>
-        </nav>
-      </div>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 300 }}>
+        International Ltd
+      </h2>
+      <p style={{ marginTop: '1rem', fontSize: '1.2rem', maxWidth: '600px' }}>
+        Uniting care, culture, and trade under one vision.
+      </p>
+      <a
+        href="#learn-more"
+        style={{
+          marginTop: '2rem',
+          color: 'white',
+          textDecoration: 'underline',
+          fontSize: '1rem',
+        }}
+      >
+        Learn more
+      </a>
     </section>
-  );
+  )
 }
