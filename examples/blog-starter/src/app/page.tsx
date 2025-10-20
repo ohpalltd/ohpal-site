@@ -1,30 +1,15 @@
-import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
-import { getAllPosts } from "@/lib/api";
-
-export default function Index() {
-  const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
-
+export default function Home() {
   return (
-    <main>
-      <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-      </Container>
+    <main style={{ fontFamily: 'Arial, sans-serif', textAlign: 'center', padding: '50px' }}>
+      <h1>Welcome to Ohpal 🌐</h1>
+      <p>Building connections across wellness, care, logistics, and philanthropy.</p>
+
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '50px' }}>
+        <a href="#" style={{ textDecoration: 'none', color: '#2b6cb0' }}>💎 SapphiraCare</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#c53030' }}>🔥 Carneliana</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#38a169' }}>🚢 Peridotrepid</a>
+        <a href="#" style={{ textDecoration: 'none', color: '#d69e2e' }}>🌍 Citrinoor</a>
+      </div>
     </main>
   );
 }
