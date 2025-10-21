@@ -1,0 +1,45 @@
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-reg.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-bd.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-it.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-bdit.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-lt.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TheSeasons';
+  src: url('/TheSeasonsFont/theseasons-ltit.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+body {
+  font-family: 'TheSeasons', serif;
+}
