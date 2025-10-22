@@ -60,16 +60,15 @@ export default function RootLayout({
               padding: '0 1rem',
             }}
           >
-           {/* Ohpal 2D Transparent Hero */}
-            <Image
+           <Image
               src="/Ohpal2DTransparentHero.png"
-              alt="Ohpal 2D Transparent Hero"
+              alt="Ohpal 2D"
               width={240}
               height={240}
               priority
+              sizes="(max-width: 480px) 140px, (max-width: 768px) 180px, 240px"
               style={{ opacity: 0.95 }}
-          />
-
+            />
 
             <h1 style={{ fontSize: '4rem', lineHeight: 1.1, margin: '0.75rem 0 0.25rem' }}>
               OHPAL
