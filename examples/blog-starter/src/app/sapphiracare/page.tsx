@@ -22,74 +22,83 @@ export default function SapphiraCareHome() {
       <img
         src="/SapphiraCareTransparent.png"
         alt="SapphiraCare Logo"
-        style={{
-          width: "200px",
-          marginBottom: "1.5rem",
-          opacity: 0.95
-        }}
+        style={{ width: "200px", marginBottom: "1.5rem", opacity: 0.95 }}
       />
 
       {/* Title */}
-      <h1
-        style={{
-          fontSize: "2.5rem",
-          fontWeight: "bold",
-          marginBottom: "1rem"
-        }}
-      >
+      <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>
         SapphiraCare
       </h1>
 
       {/* Blurb */}
       <p
         style={{
-          maxWidth: "600px",
-          lineHeight: "1.6",
+          maxWidth: "640px",
+          lineHeight: 1.6,
           color: "#ccc",
           marginBottom: "2rem"
         }}
       >
         SapphiraCare is Ohpal’s dedicated branch for care and support services.
-        Built to connect communities, contractors, and care recipients through
-        trust, accessibility, and heart. Our mission is to make quality care
-        simple, secure, and human.
+        We connect communities, contractors, and care recipients through trust,
+        accessibility, and heart — making quality care simple, secure, and human.
       </p>
 
-      {/* Buttons */}
+      {/* Actions */}
       <div
         style={{
           display: "flex",
-          gap: "1rem",
+          gap: "0.75rem",
           flexWrap: "wrap",
-          justifyContent: "center"
+          justifyContent: "center",
+          marginBottom: "0.75rem"
         }}
       >
         <a
-          href="/signup"
+          href="/login?role=USER"
           style={{
             backgroundColor: "white",
             color: "black",
-            padding: "0.75rem 1.5rem",
+            padding: "0.75rem 1.25rem",
             borderRadius: "0.75rem",
             textDecoration: "none",
-            fontWeight: "600"
+            fontWeight: 600
           }}
         >
-          Sign up
+          User login
         </a>
+
         <a
-          href="/login"
+          href="/login?role=CONTRACTOR"
           style={{
             border: "1px solid white",
-            padding: "0.75rem 1.5rem",
+            padding: "0.75rem 1.25rem",
+            borderRadius: "0.75rem",
+            textDecoration: "none",
+            color: "white",
+            fontWeight: 600
+          }}
+        >
+          Contractor login
+        </a>
+
+        <a
+          href="/signup"
+          style={{
+            border: "1px solid white",
+            padding: "0.75rem 1.25rem",
             borderRadius: "0.75rem",
             textDecoration: "none",
             color: "white"
           }}
         >
-          Login
+          Sign up
         </a>
       </div>
+
+      <small style={{ color: "#9ca3af" }}>
+        Don’t have an account yet? Click <strong>Sign up</strong>.
+      </small>
     </main>
   );
 }
