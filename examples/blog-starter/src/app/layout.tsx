@@ -25,7 +25,7 @@ export default function RootLayout({
       >
         {/* HERO */}
         <header style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
-          {/* Background video (muted + autoplay for browsers) */}
+          {/* Background video */}
           <video
             key="hero-video"
             autoPlay
@@ -43,7 +43,7 @@ export default function RootLayout({
               objectFit: 'cover',
               filter: 'brightness(0.6)',
             }}
-            src="/Lush%20Palm%20Forrest.mp4"
+            src="/videos/lush-palm-forest.mp4"
           />
 
           {/* Content overlay */}
@@ -58,47 +58,4 @@ export default function RootLayout({
               alignItems: 'center',
               textAlign: 'center',
               padding: '0 1rem',
-            }}
-          >
-            <Image
-              src="/Ohpal%20Master%20Logo.png"
-              alt="Ohpal logo"
-              width={240}
-              height={240}
-              priority
-              style={{ opacity: 0.95 }}
-            />
 
-            <h1 style={{ fontSize: '4rem', lineHeight: 1.1, margin: '0.75rem 0 0.25rem' }}>
-              OHPAL
-            </h1>
-            <h2 style={{ fontWeight: 400, margin: '0 0 0.75rem' }}>International Ltd</h2>
-            <p style={{ maxWidth: 780, margin: '0 0 1.25rem', fontSize: '1.05rem' }}>
-              Seamless collaboration of Trade, Care and Culture.
-            </p>
-
-            <a
-              href="#about"
-              style={{
-                display: 'inline-block',
-                padding: '0.6rem 1rem',
-                border: '1px solid rgba(255,255,255,0.6)',
-                borderRadius: 999,
-                color: '#fff',
-                textDecoration: 'none',
-                backdropFilter: 'blur(3px)',
-              }}
-            >
-              Learn more
-            </a>
-          </div>
-        </header>
-
-        {/* MAIN CONTENT */}
-        <main id="about" style={{ background: '#f7f7f7', color: '#111' }}>
-          {children}
-        </main>
-      </body>
-    </html>
-  )
-}
