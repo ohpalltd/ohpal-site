@@ -60,15 +60,16 @@ export default function RootLayout({
               padding: '0 1rem',
             }}
           >
-            {/* Ohpal 2D (space encoded) */}
+           {/* Ohpal 2D Transparent Hero */}
             <Image
-              src="/Ohpal%202D.png"
-              alt="Ohpal 2D"
+              src="/Ohpal2DTransparentHero.png"
+              alt="Ohpal 2D Transparent Hero"
               width={240}
               height={240}
               priority
               style={{ opacity: 0.95 }}
-            />
+          />
+
 
             <h1 style={{ fontSize: '4rem', lineHeight: 1.1, margin: '0.75rem 0 0.25rem' }}>
               OHPAL
