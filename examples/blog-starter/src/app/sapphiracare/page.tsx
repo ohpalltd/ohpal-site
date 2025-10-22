@@ -20,13 +20,25 @@ export default function SapphiraCareHome() {
     >
       {/* Logo */}
       <img
-        src="/SapphiraCareTransparent.png"
+        src="/SapphiracareTransparentLogo.png"
         alt="SapphiraCare Logo"
-        style={{ width: "200px", marginBottom: "1.5rem", opacity: 0.95 }}
+        style={{
+          width: "240px",
+          marginBottom: "1.5rem",
+          opacity: 0.95,
+          maxWidth: "80%"
+        }}
       />
 
       {/* Title */}
-      <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>
+      <h1
+        style={{
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+          marginBottom: "1rem",
+          letterSpacing: "0.5px"
+        }}
+      >
         SapphiraCare
       </h1>
 
@@ -34,9 +46,10 @@ export default function SapphiraCareHome() {
       <p
         style={{
           maxWidth: "640px",
-          lineHeight: 1.6,
+          lineHeight: 1.7,
           color: "#ccc",
-          marginBottom: "2rem"
+          marginBottom: "2rem",
+          fontSize: "1.05rem"
         }}
       >
         SapphiraCare is Ohpal’s dedicated branch for care and support services.
@@ -44,14 +57,14 @@ export default function SapphiraCareHome() {
         accessibility, and heart — making quality care simple, secure, and human.
       </p>
 
-      {/* Actions */}
+      {/* Buttons */}
       <div
         style={{
           display: "flex",
           gap: "0.75rem",
           flexWrap: "wrap",
           justifyContent: "center",
-          marginBottom: "0.75rem"
+          marginBottom: "1rem"
         }}
       >
         <a
@@ -96,7 +109,7 @@ export default function SapphiraCareHome() {
         </a>
       </div>
 
-      <small style={{ color: "#9ca3af" }}>
+      <small style={{ color: "#9ca3af", marginTop: "0.5rem" }}>
         Don’t have an account yet? Click <strong>Sign up</strong>.
       </small>
     </main>
