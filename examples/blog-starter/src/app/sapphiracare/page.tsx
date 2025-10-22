@@ -18,14 +18,52 @@ export default function SapphiraCareHome() {
         padding: "2rem"
       }}
     >
-      <h1 style={{ fontSize: "2.5rem", fontWeight: "bold", marginBottom: "1rem" }}>
+      {/* Logo */}
+      <img
+        src="/SapphiraCareTransparent.png"
+        alt="SapphiraCare Logo"
+        style={{
+          width: "200px",
+          marginBottom: "1.5rem",
+          opacity: 0.95
+        }}
+      />
+
+      {/* Title */}
+      <h1
+        style={{
+          fontSize: "2.5rem",
+          fontWeight: "bold",
+          marginBottom: "1rem"
+        }}
+      >
         SapphiraCare
       </h1>
-      <p style={{ maxWidth: "600px", lineHeight: "1.6", color: "#ccc", marginBottom: "2rem" }}>
-        Your care network hub — simple onboarding, secure records, and a community-first approach.
+
+      {/* Blurb */}
+      <p
+        style={{
+          maxWidth: "600px",
+          lineHeight: "1.6",
+          color: "#ccc",
+          marginBottom: "2rem"
+        }}
+      >
+        SapphiraCare is Ohpal’s dedicated branch for care and support services.
+        Built to connect communities, contractors, and care recipients through
+        trust, accessibility, and heart. Our mission is to make quality care
+        simple, secure, and human.
       </p>
 
-      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}>
+      {/* Buttons */}
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+          flexWrap: "wrap",
+          justifyContent: "center"
+        }}
+      >
         <a
           href="/signup"
           style={{
