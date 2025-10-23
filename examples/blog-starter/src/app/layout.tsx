@@ -1,17 +1,17 @@
 // examples/blog-starter/src/app/layout.tsx
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import './globals.css'
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Ohpal International Ltd',
   description: 'Seamless collaboration of Trade, Care and Culture.',
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -25,7 +25,6 @@ export default function RootLayout({
       >
         {/* ===================== HERO ===================== */}
         <header style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
-          {/* Background video (your file also has spaces, so encode them) */}
           <video
             key="hero-video"
             autoPlay
@@ -46,7 +45,6 @@ export default function RootLayout({
             src="/Lush%20Palm%20Forrest.mp4"
           />
 
-          {/* Content overlay */}
           <div
             style={{
               position: 'relative',
@@ -60,7 +58,7 @@ export default function RootLayout({
               padding: '0 1rem',
             }}
           >
-           <Image
+            <Image
               src="/Ohpal2DTransparentHero.png"
               alt="Ohpal 2D"
               width={240}
@@ -78,8 +76,9 @@ export default function RootLayout({
               A seamless collaboration in Trade, Care and Culture.
             </p>
 
+            {/* CTA points to page content */}
             <a
-              href="#branches"
+              href="#about"
               style={{
                 display: 'inline-block',
                 padding: '0.6rem 1rem',
@@ -95,124 +94,11 @@ export default function RootLayout({
           </div>
         </header>
 
-        {/* ===================== BRANCHES STRIP ===================== */}
-        <section
-          id="branches"
-          style={{
-            background: '#111',
-            color: '#fff',
-            padding: '3rem 1rem',
-          }}
-        >
-          <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-            <h3 style={{ textAlign: 'center', marginBottom: '2rem', fontWeight: 400 }}>
-              Our branches
-            </h3>
-
-            <div
-              style={{
-                display: 'grid',
-                gap: '1.25rem',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-                alignItems: 'center',
-              }}
-            >
-              {/* Peridotrepid */}
-              <div
-                style={{
-                  background: '#1b1b1b',
-                  border: '1px solid #2a2a2a',
-                  borderRadius: 16,
-                  padding: '1.25rem',
-                  textAlign: 'center',
-                }}
-              >
-                <Image
-                  src="/PeridotrepidTransparentLogo.png"
-                  alt="Peridotrepid"
-                  width={200}
-                  height={80}
-                  style={{ height: 'auto', margin: '0 auto' }}
-                />
-                <p style={{ opacity: 0.8, fontSize: '0.95rem', marginTop: '0.75rem' }}>
-                  Logistics and procurement
-                </p>
-              </div>
-
-              {/* Carneliana */}
-              <div
-                style={{
-                  background: '#1b1b1b',
-                  border: '1px solid #2a2a2a',
-                  borderRadius: 16,
-                  padding: '1.25rem',
-                  textAlign: 'center',
-                }}
-              >
-                <Image
-                  src="/CarnelianaTransparentLogo.png"
-                  alt="Carneliana"
-                  width={200}
-                  height={80}
-                  style={{ height: 'auto', margin: '0 auto' }}
-                />
-                <p style={{ opacity: 0.8, fontSize: '0.95rem', marginTop: '0.75rem' }}>
-                  Wellness and medical travel
-                </p>
-              </div>
-
-              {/* SapphiraCare */}
-              <div
-                style={{
-                  background: '#1b1b1b',
-                  border: '1px solid #2a2a2a',
-                  borderRadius: 16,
-                  padding: '1.25rem',
-                  textAlign: 'center',
-                }}
-              >
-                <Image
-                  src="/SapphiraCareTransparentLogo.png"
-                  alt="SapphiraCare"
-                  width={200}
-                  height={80}
-                  style={{ height: 'auto', margin: '0 auto' }}
-                />
-                <p style={{ opacity: 0.8, fontSize: '0.95rem', marginTop: '0.75rem' }}>
-                  Care and support services
-                </p>
-              </div>
-
-              {/* Citrinoor */}
-              <div
-                style={{
-                  background: '#1b1b1b',
-                  border: '1px solid #2a2a2a',
-                  borderRadius: 16,
-                  padding: '1.25rem',
-                  textAlign: 'center',
-                }}
-              >
-                <Image
-                  src="/CitrinoorTransparentLogo.png"
-                  alt="Citrinoor"
-                  width={200}
-                  height={80}
-                  style={{ height: 'auto', margin: '0 auto' }}
-                />
-                <p style={{ opacity: 0.8, fontSize: '0.95rem', marginTop: '0.75rem' }}>
-                  Community and philanthropy
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* ===================== MAIN CONTENT ===================== */}
         <main id="about" style={{ background: '#f7f7f7', color: '#111' }}>
           {children}
         </main>
       </body>
     </html>
-  )
+  );
 }
