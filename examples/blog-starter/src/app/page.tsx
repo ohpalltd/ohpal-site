@@ -18,7 +18,7 @@ export default function HomePage() {
         A seamless collaboration in Trade, Care, and Culture.
       </p>
 
-      {/* Branch tiles */}
+      {/* Branch grid */}
       <div
         style={{
           display: "flex",
@@ -35,9 +35,13 @@ export default function HomePage() {
           <img
             src="/Peridotrepid.png"
             alt="Peridotrepid"
-            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
           />
-        <p style={{ fontWeight: 600 }}>Peridotrepid</p>
+          <p style={{ fontWeight: 600 }}>Peridotrepid</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
             Logistics and procurement
           </p>
@@ -48,7 +52,11 @@ export default function HomePage() {
           <img
             src="/Carneliana.png"
             alt="Carneliana"
-            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
           />
           <p style={{ fontWeight: 600 }}>Carneliana</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
@@ -68,9 +76,13 @@ export default function HomePage() {
         >
           <div>
             <img
-              src="/Sapphiracare.png"
+              src="/SapphiraCare.png"
               alt="SapphiraCare"
-              style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
+              style={{
+                width: "100%",
+                borderRadius: 10,
+                marginBottom: "0.75rem",
+              }}
             />
             <p style={{ fontWeight: 600 }}>SapphiraCare</p>
             <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
@@ -84,7 +96,11 @@ export default function HomePage() {
           <img
             src="/Citrinoor.png"
             alt="Citrinoor"
-            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
           />
           <p style={{ fontWeight: 600 }}>Citrinoor</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
