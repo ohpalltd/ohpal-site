@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+use client;
+  import { useEffect } from "react";
 
 export const metadata = {
   title: "SapphiraCare — Ohpal",
