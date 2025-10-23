@@ -8,7 +8,7 @@ export default function HomePage() {
         backgroundColor: "#0a0a0a",
         color: "white",
         textAlign: "center",
-        padding: "3rem 1rem"
+        padding: "3rem 1rem",
       }}
     >
       <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
@@ -18,58 +18,61 @@ export default function HomePage() {
         A seamless collaboration in Trade, Care, and Culture.
       </p>
 
-      {/* Branch logos section */}
+      {/* Branch tiles */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
+          alignItems: "start",
           flexWrap: "wrap",
-          gap: "2rem"
+          gap: "3rem",
+          maxWidth: "980px",
+          margin: "0 auto",
         }}
       >
         {/* Peridotrepid */}
-        <div style={{ width: "180px" }}>
+        <div style={{ width: 180 }}>
           <img
-            src="/PeridotrepidTransparentLogo.png"
+            src="/Peridotrepid.png"
             alt="Peridotrepid"
-            style={{ width: "100%", borderRadius: "10px", marginBottom: "0.75rem" }}
+            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
           />
-          <p style={{ fontWeight: "600" }}>Peridotrepid</p>
+        <p style={{ fontWeight: 600 }}>Peridotrepid</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
             Logistics and procurement
           </p>
         </div>
 
         {/* Carneliana */}
-        <div style={{ width: "180px" }}>
+        <div style={{ width: 180 }}>
           <img
-            src="/CarnelianaTransparentLogo.png"
+            src="/Carneliana.png"
             alt="Carneliana"
-            style={{ width: "100%", borderRadius: "10px", marginBottom: "0.75rem" }}
+            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
           />
-          <p style={{ fontWeight: "600" }}>Carneliana</p>
+          <p style={{ fontWeight: 600 }}>Carneliana</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
             Wellness and medical travel
           </p>
         </div>
 
-        {/* SapphiraCare */}
+        {/* SapphiraCare (linked) */}
         <Link
           href="/sapphiracare"
           style={{
             textDecoration: "none",
             color: "inherit",
-            width: "180px",
-            display: "block"
+            width: 180,
+            display: "block",
           }}
         >
           <div>
             <img
-              src="/SapphiracareTransparentLogo.png"
+              src="/Sapphiracare.png"
               alt="SapphiraCare"
-              style={{ width: "100%", borderRadius: "10px", marginBottom: "0.75rem" }}
+              style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
             />
-            <p style={{ fontWeight: "600" }}>SapphiraCare</p>
+            <p style={{ fontWeight: 600 }}>SapphiraCare</p>
             <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
               Care and support services
             </p>
@@ -77,13 +80,13 @@ export default function HomePage() {
         </Link>
 
         {/* Citrinoor */}
-        <div style={{ width: "180px" }}>
+        <div style={{ width: 180 }}>
           <img
-            src="/CitrinoorTransparentLogo.png"
+            src="/Citrinoor.png"
             alt="Citrinoor"
-            style={{ width: "100%", borderRadius: "10px", marginBottom: "0.75rem" }}
+            style={{ width: "100%", borderRadius: 10, marginBottom: "0.75rem" }}
           />
-          <p style={{ fontWeight: "600" }}>Citrinoor</p>
+          <p style={{ fontWeight: 600 }}>Citrinoor</p>
           <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
             Community and philanthropy
           </p>
