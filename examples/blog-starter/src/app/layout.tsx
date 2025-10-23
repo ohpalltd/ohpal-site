@@ -128,7 +128,7 @@ export default function RootLayout({
                 }}
               >
                 <Image
-                  src="/Peridotrepid.png"
+                  src="/PeridotrepidTransparentLogo.png"
                   alt="Peridotrepid"
                   width={200}
                   height={80}
@@ -150,7 +150,7 @@ export default function RootLayout({
                 }}
               >
                 <Image
-                  src="/Carneliana.png"
+                  src="/CarnelianaTransparentLogo.png"
                   alt="Carneliana"
                   width={200}
                   height={80}
@@ -172,7 +172,7 @@ export default function RootLayout({
                 }}
               >
                 <Image
-                  src="/SapphiraCare.png"
+                  src="/SapphiraCareTransparentLogo.png"
                   alt="SapphiraCare"
                   width={200}
                   height={80}
@@ -194,7 +194,7 @@ export default function RootLayout({
                 }}
               >
                 <Image
-                  src="/Citrinoor.png"
+                  src="/CitrinoorTransparentLogo.png"
                   alt="Citrinoor"
                   width={200}
                   height={80}
