@@ -1,10 +1,5 @@
-use client;
-  import { useEffect } from "react";
-
-export const metadata = {
-  title: "SapphiraCare — Ohpal",
-  description: "Care and support services by Ohpal"
-};
+'use client';
+import { useEffect } from "react";
 
 export default function SapphiraCareHome() {
   // Trigger fade-in once the component mounts
@@ -146,4 +141,3 @@ export default function SapphiraCareHome() {
     </>
   );
 }
-
