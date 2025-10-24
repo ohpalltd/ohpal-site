@@ -6,13 +6,12 @@ export default function SignupChooser() {
   const router = useRouter()
   const [open, setOpen] = useState(false)
 
-  // open the slide automatically when page loads
   useEffect(() => {
     setOpen(true)
   }, [])
 
   return (
-    <main style={pageWrap}>
+    <main style={{ minHeight: '100vh', background: '#050505' }}>
       {/* Dim background */}
       <div
         onClick={() => setOpen(false)}
@@ -44,78 +43,82 @@ export default function SignupChooser() {
           padding: 20,
         }}
       >
-        <div style={headerRow}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 10,
+          }}
+        >
           <h1 style={{ fontSize: '1.5rem', margin: 0 }}>Join SapphiraCare</h1>
-          <button onClick={() => setOpen(false)} style={closeBtn}>✕</button>
+          <button
+            onClick={() => setOpen(false)}
+            style={{
+              background: 'none',
+              border: '1px solid rgba(255,255,255,0.3)',
+              color: '#fff',
+              padding: '6px 10px',
+              borderRadius: 10,
+              cursor: 'pointer',
+            }}
+          >
+            ✕
+          </button>
         </div>
 
         <p style={{ color: '#bfc6d1', marginBottom: 15 }}>Are you a…</p>
 
-        <div style={optionsGrid}>
+        <div style={{ display: 'grid', gap: 12 }}>
           <button
             onClick={() => router.push('/sapphiracare/signup/assistance')}
-            style={optionBtn}
+            style={{
+              textAlign: 'left',
+              padding: '14px 16px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: 14,
+              color: '#fff',
+              cursor: 'pointer',
+            }}
           >
             User
-            <span style={optionSub}>I’m seeking care / assistance</span>
+            <span
+              style={{
+                display: 'block',
+                fontSize: 13,
+                opacity: 0.85,
+              }}
+            >
+              I’m seeking care / assistance
+            </span>
           </button>
 
           <button
             onClick={() => router.push('/sapphiracare/signup/provider/prescreen')}
-            style={optionBtn}
+            style={{
+              textAlign: 'left',
+              padding: '14px 16px',
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              borderRadius: 14,
+              color: '#fff',
+              cursor: 'pointer',
+            }}
           >
             Contractor
-            <span style={optionSub}>I can provide care</span>
+            <span
+              style={{
+                display: 'block',
+                fontSize: 13,
+                opacity: 0.85,
+              }}
+            >
+              I can provide care
+            </span>
           </button>
-
-          {/* keep these two hidden until later */}
-          {/* <button onClick={() => router.push('/sapphiracare/signup/org')} style={optionBtn}>Organisation<span style={optionSub}>Manage clients & carers</span></button> */}
-          {/* <button onClick={() => router.push('/sapphiracare/signup/partner')} style={optionBtn}>Partner<span style={optionSub}>Refer or collaborate</span></button> */}
         </div>
       </div>
     </main>
   )
-}
-
-// ---- Styles ----
-const pageWrap = {
-  minHeight: '100vh',
-  background: '#050505',
-}
-
-const headerRow = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: 10,
-}
-
-const closeBtn = {
-  background: 'none',
-  border: '1px solid rgba(255,255,255,0.3)',
-  color: '#fff',
-  padding: '6px 10px',
-  borderRadius: 10,
-  cursor: 'pointer',
-}
-
-const optionsGrid = {
-  display: 'grid',
-  gap: '12px',
-}
-
-const optionBtn = {
-  textAlign: 'left',
-  padding: '14px 16px',
-  background: 'rgba(255,255,255,0.05)',
-  border: '1px solid rgba(255,255,255,0.15)',
-  borderRadius: 14,
-  color: '#fff',
-  cursor: 'pointer',
-}
-
-const optionSub = {
-  display: 'block',
-  fontSize: 13,
-  opacity: 0.85,
 }
