@@ -1,70 +1,72 @@
-'use client';
+'use client'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-import type React from 'react';
-import Link from 'next/link';
+export default function SignupChooser() {
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
 
-export default function SignupRolePicker() {
+  useEffect(() => { setOpen(true) }, [])
+
   return (
     <main style={wrap}>
-      <div style={card}>
-        <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
-          <img
-            src="/SapphiracareTransparentLogo.png"
-            alt="SapphiraCare"
-            style={{ width: 120, opacity: 0.9 }}
-          />
-          <h1 style={{ fontSize: '2rem', marginTop: '0.5rem' }}>Join SapphiraCare</h1>
-          <p style={{ color: '#d1d5db' }}>Choose your path to continue</p>
+      {/* backdrop */}
+      <div
+        onClick={() => setOpen(false)}
+        style={{
+          position:'fixed', inset:0, background:'rgba(0,0,0,0.5)',
+          opacity: open ? 1 : 0, pointerEvents: open ? 'auto' : 'none',
+          transition:'opacity .25s ease'
+        }}
+      />
+
+      {/* slide-in panel */}
+      <div style={{
+        position:'fixed', top:0, left:0, height:'100vh', width:'92%', maxWidth:520,
+        background:'#0b0c10', color:'#fff', borderRight:'1px solid rgba(255,255,255,.1)',
+        transform: open ? 'translateX(0)' : 'translateX(-100%)',
+        transition:'transform .28s ease', boxShadow:'0 10px 40px rgba(0,0,0,.4)', padding:'20px'
+      }}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+          <h1 style={{fontSize:'1.5rem'}}>Join SapphiraCare</h1>
+          <button onClick={()=>setOpen(false)} style={ghostBtn}>✕</button>
         </div>
 
-        <div style={grid}>
-          <Link href="/sapphiracare/signup/assistance" style={cardLink as React.CSSProperties}>
-            <strong style={{ fontSize: '1.1rem' }}>I’m seeking assistance</strong>
-            <span style={{ color: '#d1d5db' }}>Create an assistance application</span>
-          </Link>
+        <p style={{color:'#bfc6d1'}}>Are you a…</p>
 
-          <Link href="/sapphiracare/signup/provider" style={cardLink as React.CSSProperties}>
-            <strong style={{ fontSize: '1.1rem' }}>I can provide care</strong>
-            <span style={{ color: '#d1d5db' }}>Create a provider application</span>
-          </Link>
+        <div style={{display:'grid', gap:'12px', marginTop:'10px'}}>
+          {/* USER → assistance flow */}
+          <button
+            onClick={() => router.push('/sapphiracare/signup/assistance')}
+            style={bigBtn}
+          >
+            User
+            <span style={{display:'block',fontSize:13,opacity:.85}}>I’m seeking care/assistance</span>
+          </button>
+
+          {/* CONTRACTOR → prescreen first */}
+          <button
+            onClick={() => router.push('/sapphiracare/signup/provider/prescreen')}
+            style={bigBtn}
+          >
+            Contractor
+            <span style={{display:'block',fontSize:13,opacity:.85}}>I can provide care</span>
+          </button>
+        </div>
+
+        <div style={{marginTop:18}}>
+          <Link href="/" style={{color:'#9ecbff',textDecoration:'none'}}>← Back to Ohpal</Link>
         </div>
       </div>
     </main>
-  );
+  )
 }
 
-const wrap: React.CSSProperties = {
-  minHeight: '100vh',
-  display: 'grid',
-  placeItems: 'center',
-  backgroundColor: '#050505',
-  color: '#fff',
-  padding: '2rem 1rem',
-};
+const wrap = { minHeight:'100vh', background:'#050505' }
+const ghostBtn = { background:'none', border:'1px solid rgba(255,255,255,.15)', color:'#fff', padding:'6px 10px', borderRadius:10, cursor:'pointer' }
+const bigBtn = {
+  textAlign:'left', padding:'14px 16px', background:'rgba(255,255,255,.05)',
+  border:'1px solid rgba(255,255,255,.15)', borderRadius:14, color:'#fff', cursor:'pointer',
+}
 
-const card: React.CSSProperties = {
-  width: '100%',
-  maxWidth: 820,
-  background: 'linear-gradient(145deg, rgba(18,18,18,0.95), rgba(25,28,32,0.85))',
-  border: '1px solid rgba(255,255,255,0.08)',
-  borderRadius: '1.75rem',
-  padding: '2rem',
-};
-
-const grid: React.CSSProperties = {
-  display: 'grid',
-  gap: '1rem',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-};
-
-const cardLink: React.CSSProperties = {
-  display: 'grid',
-  gap: '0.35rem',
-  padding: '1.25rem',
-  borderRadius: '1rem',
-  border: '1px solid rgba(255,255,255,0.15)',
-  background: 'rgba(255,255,255,0.04)',
-  textDecoration: 'none',
-  color: '#fff',
-  cursor: 'pointer',
-};
