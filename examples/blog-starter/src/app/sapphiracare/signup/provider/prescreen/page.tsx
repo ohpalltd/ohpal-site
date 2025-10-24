@@ -1,91 +1,121 @@
 'use client'
-import { useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 
-const API = process.env.NEXT_PUBLIC_OHPAL_API // set later
+import { useState, ChangeEvent, FormEvent } from 'react'
 
-export default function ProviderPreScreen() {
-  const router = useRouter()
-  const [submitting, setSubmitting] = useState(false)
+export default function ProviderPrescreen() {
   const [form, setForm] = useState({
-    firstName: '', middleName: '', surname: '',
-    dob: '', city: '', country: ''
+    firstName: '',
+    middleName: '',
+    surname: '',
+    dob: '',
+    city: '',
+    country: '',
   })
 
-  const onChange = (e) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setForm((p) => ({ ...p, [name]: value }))
+    setForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitting(true)
+
+    // ✳️ Placeholder for blacklist check API call
     try {
-      // Build a full name for matching
-      const fullName = [form.firstName, form.middleName, form.surname].filter(Boolean).join(' ')
-      // If API not set yet, simulate "clear" so you can keep building
-      if (!API) {
-        router.push('/sapphiracare/signup/provider')
-        return
-      }
-      const res = await fetch(`${API}/screening/check`, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({
-          fullName, dob: form.dob, city: form.city, country: form.country
-        })
-      })
-      if (!res.ok) throw new Error('screening failed')
-      const data = await res.json() // { status: 'clear' | 'flagged' }
-      if (data.status === 'flagged') {
-        // pass context via query
-        const q = new URLSearchParams({ fullName, dob: form.dob, city: form.city, country: form.country })
-        router.push('/sapphiracare/signup/provider/kyc?'+q.toString())
-      } else {
-        router.push('/sapphiracare/signup/provider')
-      }
-    } catch(e) {
-      alert('Error running screening. Please try again.')
+      console.log('Submitting form:', form)
+      alert('Form submitted successfully!')
+    } catch (error) {
+      console.error('Submission failed:', error)
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <main style={wrap}>
-      <div style={card}>
-        <Link href="/sapphiracare/signup" style={{color:'#9ecbff',textDecoration:'none'}}>← Back</Link>
-        <h2 style={{margin:'10px 0'}}>Contractor pre-screen</h2>
-        <p style={{color:'#cbd5e1',marginBottom:'12px'}}>Tell us who you are first. We’ll do a quick compliance check.</p>
+    <main
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#050505',
+        color: 'white',
+        padding: '2rem 1rem',
+      }}
+    >
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '720px',
+          background: 'linear-gradient(145deg, rgba(18,18,18,0.95), rgba(25,28,32,0.85))',
+          borderRadius: '1.75rem',
+          padding: '2.25rem 2.5rem',
+          boxShadow: '0 25px 50px -12px rgba(15, 15, 15, 0.8)',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          backdropFilter: 'blur(12px)',
+        }}
+      >
+        <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Provider Pre-Screening</h1>
+        <p style={{ color: '#d1d5db', marginBottom: '2rem' }}>
+          Please fill in your details below to begin verification.
+        </p>
 
-        <form onSubmit={onSubmit} style={{display:'grid',gap:'10px'}}>
-          {input('First name', 'firstName', form.firstName, onChange, true)}
-          {input('Middle name (optional)', 'middleName', form.middleName, onChange)}
-          {input('Surname', 'surname', form.surname, onChange, true)}
-          {input('Date of birth', 'dob', form.dob, onChange, true, 'date')}
-          {input('City', 'city', form.city, onChange, true)}
-          {input('Country', 'country', form.country, onChange, true)}
+        <form onSubmit={onSubmit} style={{ display: 'grid', gap: '1rem' }}>
+          {[
+            { name: 'firstName', label: 'First Name' },
+            { name: 'middleName', label: 'Middle Name (optional)' },
+            { name: 'surname', label: 'Surname' },
+            { name: 'dob', label: 'Date of Birth', type: 'date' },
+            { name: 'city', label: 'City' },
+            { name: 'country', label: 'Country' },
+          ].map((field) => (
+            <div key={field.name} style={{ display: 'flex', flexDirection: 'column' }}>
+              <label htmlFor={field.name} style={{ marginBottom: '0.25rem' }}>
+                {field.label}
+              </label>
+              <input
+                id={field.name}
+                name={field.name}
+                type={field.type || 'text'}
+                value={(form as any)[field.name]}
+                onChange={onChange}
+                style={{
+                  padding: '0.65rem 0.75rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                  color: 'white',
+                  fontSize: '1rem',
+                }}
+                required={field.name !== 'middleName'}
+              />
+            </div>
+          ))}
 
-          <button type="submit" disabled={submitting} style={btn}>
-            {submitting ? 'Checking…' : 'Continue'}
+          <button
+            type="submit"
+            disabled={submitting}
+            style={{
+              marginTop: '1rem',
+              padding: '0.85rem 1.25rem',
+              borderRadius: '0.9rem',
+              border: 'none',
+              background: submitting
+                ? 'rgba(156, 163, 175, 0.35)'
+                : 'linear-gradient(135deg, #38bdf8, #6366f1)',
+              color: 'white',
+              fontWeight: 600,
+              fontSize: '1rem',
+              cursor: submitting ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {submitting ? 'Submitting...' : 'Submit'}
           </button>
         </form>
       </div>
     </main>
-  )
-}
-
-const wrap = { minHeight:'100vh', display:'grid', placeItems:'center', background:'#050505', color:'#fff', padding:'2rem 1rem' }
-const card = { width:'100%', maxWidth:760, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:20, padding:'2rem' }
-const baseInput = { padding:'0.65rem 0.75rem', borderRadius:12, border:'1px solid rgba(255,255,255,0.25)', background:'rgba(255,255,255,0.05)', color:'#fff' }
-const btn = { marginTop:'0.3rem', padding:'0.85rem 1.25rem', borderRadius:12, border:'none', background:'linear-gradient(135deg,#38bdf8,#6366f1)', color:'#fff', fontWeight:700, cursor:'pointer' }
-
-function input(label, name, value, onChange, required=false, type='text') {
-  return (
-    <label style={{display:'grid',gap:'.35rem'}}>
-      <span style={{fontWeight:600}}>{label}{required && <span style={{color:'#fbbf24'}}> *</span>}</span>
-      <input name={name} value={value} onChange={onChange} required={required} type={type} style={baseInput} />
-    </label>
   )
 }
