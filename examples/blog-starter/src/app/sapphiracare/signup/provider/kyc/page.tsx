@@ -1,76 +1,130 @@
+// @ts-nocheck
 'use client'
-import { useState, useMemo } from 'react'
-import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
 
-const API = process.env.NEXT_PUBLIC_OHPAL_API // later
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function ProviderKYC() {
+export default function ProviderKYCPage() {
   const router = useRouter()
-  const sp = useSearchParams()
-  const flaggedInfo = useMemo(() => ({
-    fullName: sp.get('fullName') || '',
-    dob: sp.get('dob') || '',
-    city: sp.get('city') || '',
-    country: sp.get('country') || ''
-  }), [sp])
-
-  const [submitting, setSubmitting] = useState(false)
-  const [passportNumber, setPassportNumber] = useState('')
   const [file, setFile] = useState(null)
+  const [submitting, setSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    firstName: '',
+    middleName: '',
+    surname: '',
+    dob: '',
+    city: '',
+    country: '',
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const onSubmit = async (e) => {
     e.preventDefault()
     setSubmitting(true)
+
     try {
-      // Later: send to `${API}/screening/kyc` with FormData.
-      // For now, just proceed to full contractor form:
-      router.push('/sapphiracare/signup/provider')
-    } catch (e) {
-      alert('Upload failed, try again.')
+      // Simulate sending data to API or Replit (future integration)
+      console.log('Submitting data:', formData, file)
+
+      // Simulate basic blacklist check placeholder
+      const blacklistedNames = ['John Doe', 'Jane Doe']
+      const fullName = `${formData.firstName} ${formData.surname}`
+
+      if (blacklistedNames.includes(fullName)) {
+        alert('This name requires further verification (possible match on watchlist).')
+        router.push('/sapphiracare/signup/provider/kyc/review')
+      } else {
+        router.push('/sapphiracare/signup/success')
+      }
+    } catch (err) {
+      console.error('Submission failed:', err)
+      alert('Something went wrong — please try again.')
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <main style={wrap}>
-      <div style={card}>
-        <Link href="/sapphiracare/signup" style={{color:'#9ecbff',textDecoration:'none'}}>← Back</Link>
-        <h2 style={{margin:'10px 0'}}>Additional verification required</h2>
-        <p style={{color:'#cbd5e1',marginBottom:'10px'}}>
-          Our screening flagged a potential match. Please provide a passport for manual review.
-        </p>
+    <main style={styles.container}>
+      <h1 style={styles.title}>Contractor Verification (KYC)</h1>
+      <form onSubmit={onSubmit} style={styles.form}>
+        <label style={styles.label}>First Name</label>
+        <input name="firstName" value={formData.firstName} onChange={handleChange} style={styles.input} required />
 
-        <div style={flagBox}>
-          <div><strong>Name:</strong> {flaggedInfo.fullName}</div>
-          <div><strong>DOB:</strong> {flaggedInfo.dob}</div>
-          <div><strong>City:</strong> {flaggedInfo.city}</div>
-          <div><strong>Country:</strong> {flaggedInfo.country}</div>
-        </div>
+        <label style={styles.label}>Middle Name</label>
+        <input name="middleName" value={formData.middleName} onChange={handleChange} style={styles.input} />
 
-        <form onSubmit={onSubmit} style={{display:'grid',gap:'10px', marginTop:'12px'}}>
-          <label style={{display:'grid',gap:'.35rem'}}>
-            <span style={{fontWeight:600}}>Passport number<span style={{color:'#fbbf24'}}> *</span></span>
-            <input value={passportNumber} onChange={(e)=>setPassportNumber(e.target.value)} required style={baseInput} />
-          </label>
+        <label style={styles.label}>Surname</label>
+        <input name="surname" value={formData.surname} onChange={handleChange} style={styles.input} required />
 
-          <label style={{display:'grid',gap:'.35rem'}}>
-            <span style={{fontWeight:600}}>Passport image (photo or scan)<span style={{color:'#fbbf24'}}> *</span></span>
-            <input type="file" accept="image/*,.pdf" onChange={(e)=>setFile(e.target.files?.[0]||null)} required style={{...baseInput, padding:'8px'}} />
-          </label>
+        <label style={styles.label}>Date of Birth</label>
+        <input name="dob" type="date" value={formData.dob} onChange={handleChange} style={styles.input} required />
 
-          <button type="submit" disabled={submitting} style={btn}>
-            {submitting ? 'Uploading…' : 'Submit & continue'}
-          </button>
-        </form>
-      </div>
+        <label style={styles.label}>City</label>
+        <input name="city" value={formData.city} onChange={handleChange} style={styles.input} required />
+
+        <label style={styles.label}>Country</label>
+        <input name="country" value={formData.country} onChange={handleChange} style={styles.input} required />
+
+        <label style={styles.label}>Upload ID or Passport (PDF/JPG/PNG)</label>
+        <input
+          type="file"
+          accept=".pdf,image/*"
+          onChange={(e) => setFile(e.target.files?.[0] || null)}
+          style={styles.input}
+        />
+
+        <button type="submit" style={styles.button} disabled={submitting}>
+          {submitting ? 'Submitting...' : 'Submit Application'}
+        </button>
+      </form>
     </main>
   )
 }
 
-const wrap = { minHeight:'100vh', display:'grid', placeItems:'center', background:'#050505', color:'#fff', padding:'2rem 1rem' }
-const card = { width:'100%', maxWidth:760, background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:20, padding:'2rem' }
-const flagBox = { border:'1px solid rgba(255,255,255,0.15)', borderRadius:12, padding:'10px', background:'rgba(255,255,255,0.05)', fontSize:14 }
-const baseInput = { padding:'0.65rem 0.75rem', borderRadius:12, border:'1px solid rgba(255,255,255,0.25)', background:'rgba(255,255,255,0.05)', color:'#fff' }
-const btn = { marginTop:'0.3rem', padding:'0.85rem 1.25rem', borderRadius:12, border:'none', background:'linear-gradient(135deg,#38bdf8,#6366f1)', color:'#fff', fontWeight:700, cursor:'pointer' }
+const styles = {
+  container: {
+    maxWidth: '640px',
+    margin: '0 auto',
+    padding: '2rem',
+    fontFamily: 'Arial, sans-serif',
+    color: '#f0f0f0',
+    backgroundColor: '#0c0c0c',
+    borderRadius: '12px',
+    boxShadow: '0 0 10px rgba(255,255,255,0.1)',
+  },
+  title: {
+    fontSize: '1.8rem',
+    marginBottom: '1.5rem',
+    textAlign: 'center',
+  },
+  form: {
+    display: 'grid',
+    gap: '1rem',
+  },
+  label: {
+    fontWeight: 'bold',
+  },
+  input: {
+    padding: '0.75rem',
+    borderRadius: '8px',
+    border: '1px solid #333',
+    backgroundColor: '#111',
+    color: '#fff',
+  },
+  button: {
+    marginTop: '1.5rem',
+    padding: '0.9rem',
+    borderRadius: '8px',
+    backgroundColor: '#0e76a8',
+    border: 'none',
+    color: '#fff',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+  },
+}
