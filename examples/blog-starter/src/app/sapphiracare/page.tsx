@@ -35,13 +35,6 @@ export default function SapphiraCareHome() {
     alert(`Submitted for ${role ?? 'role'}: ${form.fullName}, ${form.dob}, ${form.city}`)
   }
 
-  // little fade-in for hero text
-  useEffect(() => {
-    if (stage !== 'landing') return
-    const els = document.querySelectorAll('.fade-in')
-    els.forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 200))
-  }, [stage])
-
   // ---- Keep your function names; trigger animation then flip stage ----
   const startSignup = () => {
     setAnim('landing→chooser')
@@ -92,7 +85,6 @@ export default function SapphiraCareHome() {
 
         /* LEFT: landing area */
         .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 2rem; }
-        .landingActive { opacity: 1; pointer-events: auto; }
         .landingHidden { opacity: 0; pointer-events: none; }
 
         /* RIGHT: panel shell (chooser/prescreen) */
@@ -109,8 +101,6 @@ export default function SapphiraCareHome() {
 
         .panel h1 { font-size: 1.6rem; margin: 0 0 .75rem; }
         .muted { color: var(--muted); }
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
         /* buttons */
         .btn {
@@ -125,7 +115,7 @@ export default function SapphiraCareHome() {
         .opt {
           width: 100%; text-align: left; padding: 14px 16px; cursor: pointer;
           border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.06);
-          color: #ffffff; /* make button text white */
+          color: #ffffff;
         }
         .opt__title { display:block; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
         .opt__sub { display:block; font-size: 13px; opacity: .95; color: #ffffff; }
@@ -138,22 +128,22 @@ export default function SapphiraCareHome() {
           .panel { width: 100%; }
         }
 
-        /* ---- Directional cross-fade keyframes ---- */
+        /* ---- Directional cross-fade keyframes (uniform) ---- */
         @keyframes fadeOutLeft  { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(-80px)} }
         @keyframes fadeInRight  { 0% {opacity:0; transform:translateX(80px)} 100% {opacity:1; transform:translateX(0)} }
         @keyframes fadeOutRight { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(80px)} }
         @keyframes fadeInLeft   { 0% {opacity:0; transform:translateX(-80px)} 100% {opacity:1; transform:translateX(0)} }
 
-        /* Landing animations */
+        /* Landing animations (container controls all its children uniformly) */
         .landing--idle { opacity:1; transform:none; }
         .landing--exitLeft { animation: fadeOutLeft var(--dur) ease both; }
         .landing--enterLeft { animation: fadeInLeft var(--dur) ease both; }
 
-        /* Panel container animations (when appearing/disappearing overall) */
+        /* Panel container animations (shell controls all inner content uniformly) */
         .panel--enterRight { animation: fadeInRight var(--dur) ease both; }
         .panel--exitRight  { animation: fadeOutRight var(--dur) ease both; }
 
-        /* Inner content blocks (chooser/prescreen) layered */
+        /* Inner content panes (chooser/prescreen) — animate panes, not inner text */
         .stack { position: relative; min-height: 320px; }
         .pane {
           position:absolute; inset:0;
@@ -167,6 +157,9 @@ export default function SapphiraCareHome() {
         .pane.enter-left  { animation: fadeInLeft  var(--dur) ease both; }
         .pane.exit-left   { animation: fadeOutLeft var(--dur) ease both; }
         .pane.exit-right  { animation: fadeOutRight var(--dur) ease both; }
+
+        /* Performance hint */
+        .landingWrap, .panel, .pane { will-change: opacity, transform; }
       `}</style>
 
       <main className="page">
@@ -188,23 +181,22 @@ export default function SapphiraCareHome() {
             <img
               src="/SapphiracareTransparentLogo.png"
               alt="SapphiraCare Logo"
-              className="fade-in"
               style={{ width: '220px', marginBottom: '1.2rem', opacity: 0.95, maxWidth: '80%' }}
             />
-            <h1 className="fade-in" style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>
               SapphiraCare
             </h1>
-            <p className="fade-in" style={{ color: '#d1d5db', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            <p style={{ color: '#d1d5db', lineHeight: 1.7, marginBottom: '1.5rem' }}>
               SapphiraCare is Ohpal’s dedicated branch for care and support services. We connect communities,
               contractors, and care recipients through trust, accessibility, and heart — making quality care simple,
               secure, and human.
             </p>
-            <div className="fade-in row" style={{ marginBottom: '.5rem' }}>
+            <div className="row" style={{ marginBottom: '.5rem' }}>
               <Link href="/login?role=USER" className="btn btn--solid">User login</Link>
               <Link href="/login?role=CONTRACTOR" className="btn btn--ghost">Contractor login</Link>
               <button className="btn btn--ghost" onClick={startSignup}>Sign up</button>
             </div>
-            <small className="fade-in" style={{ color: '#9ca3af' }}>
+            <small style={{ color: '#9ca3af' }}>
               Do not have an account yet? Click <strong>Sign up</strong>.
             </small>
           </div>
