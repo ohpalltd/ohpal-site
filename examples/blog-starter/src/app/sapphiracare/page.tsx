@@ -13,7 +13,7 @@ type Anim =
   | 'prescreen→chooser'
   | 'toLanding' // from chooser or prescreen back to landing
 
-const DURATION_MS = 2900 // lush, prominent directional cross-fade
+const DURATION_MS = 2100 // slightly faster but still flowy
 
 export default function SapphiraCareHome() {
   const router = useRouter()
