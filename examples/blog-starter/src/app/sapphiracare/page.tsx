@@ -20,7 +20,7 @@ export default function SapphiraCareHome() {
   const [stage, setStage] = useState<Stage>('landing')
   const [role, setRole] = useState<Role>(null)
 
-  // NEW: lightweight animation state
+  // animation state
   const [anim, setAnim] = useState<Anim>('idle')
 
   // prescreen form state
@@ -42,7 +42,7 @@ export default function SapphiraCareHome() {
     els.forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 200))
   }, [stage])
 
-  // ---- Unchanged function names; bodies now set animation first, then switch stage after the animation ----
+  // ---- Keep your function names; trigger animation then flip stage ----
   const startSignup = () => {
     setAnim('landing→chooser')
     setTimeout(() => {
@@ -78,7 +78,7 @@ export default function SapphiraCareHome() {
     }, DURATION_MS)
   }
 
-  // panel visibility: keep right panel mounted during transitions
+  // keep right panel mounted during transitions
   const showPanel =
     stage !== 'landing' ||
     anim === 'landing→chooser' ||
@@ -172,7 +172,8 @@ export default function SapphiraCareHome() {
       <main className="page">
         {/* LEFT: landing */}
         <section
-          className={`landingWrap ${
+          className={[
+            'landingWrap',
             stage === 'landing' && anim === 'idle'
               ? 'landing--idle'
               : anim === 'landing→chooser'
@@ -180,7 +181,7 @@ export default function SapphiraCareHome() {
               : anim === 'toLanding'
               ? 'landing--enterLeft'
               : 'landingHidden'
-          }`}
+          ].join(' ')}
           aria-hidden={!(stage === 'landing' || anim === 'landing→chooser' || anim === 'toLanding')}
         >
           <div style={{ textAlign: 'center', maxWidth: 720 }}>
@@ -211,10 +212,7 @@ export default function SapphiraCareHome() {
 
         {/* RIGHT: chooser/prescreen shared shell, mounted during transitions */}
         {showPanel && (
-          <section
-            className="rightWrap"
-            aria-hidden={false}
-          >
+          <section className="rightWrap" aria-hidden={false}>
             <div
               className={[
                 'panel',
@@ -225,7 +223,6 @@ export default function SapphiraCareHome() {
             >
               <div className="header">
                 <h1>{stage === 'prescreen' ? 'Start verification' : 'Join SapphiraCare'}</h1>
-                {/* Your X stays and uses the same function name */}
                 <button className="x" onClick={closeAll} aria-label="Close">✕</button>
               </div>
 
@@ -253,7 +250,7 @@ export default function SapphiraCareHome() {
                     </button>
                   </div>
 
-                  {/* UPDATED DISCLAIMER (friendlier, final wording) */}
+                  {/* FINAL DISCLAIMER */}
                   <p className="muted" style={{ marginTop: 14, fontSize: 13, lineHeight: 1.5 }}>
                     We value your privacy and handle your details with care. Your information will never be shared with
                     marketing firms or external agencies.
@@ -311,7 +308,34 @@ export default function SapphiraCareHome() {
                     </Field>
 
                     <div style={{ display: 'flex', gap: 10 }}>
-                      {/* Back button keeps same handler name */}
                       <button type="button" className="btn btn--ghost" onClick={backToChooser}>Back</button>
                       <button type="submit" className="btn btn--solid" style={{ flex: 1 }}>Submit</button>
-                    </div
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+    </>
+  )
+}
+
+function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <label htmlFor={id} style={{ fontWeight: 600 }}>{label}</label>
+      {children}
+    </div>
+  )
+}
+
+const inputStyle: React.CSSProperties = {
+  padding: '0.7rem 0.8rem',
+  borderRadius: '12px',
+  border: '1px solid rgba(255,255,255,.25)',
+  background: 'rgba(255,255,255,.06)',
+  color: '#fff',
+  fontSize: '1rem',
+}
