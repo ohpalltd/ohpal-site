@@ -10,7 +10,7 @@ type Anim =
   | 'landing→chooser'
   | 'chooser→prescreen'
   | 'prescreen→chooser'
-  | 'toLanding' // from chooser or prescreen back to landing
+  | 'toLanding'
 
 const DURATION_MS = 2100 // smooth, not too fast
 
@@ -78,6 +78,23 @@ export default function SapphiraCarePage() {
 
   return (
     <>
+      {/* PAGE-SCOPED GLOBAL OVERRIDE:
+         Hide any Ohpal header/hero/learn-more that the root layout might render.
+         This CSS only exists on /sapphiracare, so it won't affect other routes. */}
+      <style jsx global>{`
+        header,
+        .site-header,
+        .ohpalHeader,
+        .ohpal-hero,
+        .home-hero,
+        .hero,
+        .learnMore,
+        .learn-more,
+        .ohpal-cta {
+          display: none !important;
+        }
+      `}</style>
+
       <style>{`
         :root { --bg:#0a0a0a; --panel:#0b0c10; --muted:#cbd5e1; --line:rgba(255,255,255,.14); --dur:${DURATION_MS}ms; }
         html, body { background: var(--bg); }
