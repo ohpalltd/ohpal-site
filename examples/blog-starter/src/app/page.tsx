@@ -64,7 +64,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* SapphiraCare (linked) */}
+        {/* SapphiraCare (linked to /sapphiracare) */}
         <Link
           href="/sapphiracare"
           style={{
@@ -73,6 +73,8 @@ export default function HomePage() {
             width: 180,
             display: "block",
           }}
+          prefetch={false}
+          aria-label="Go to SapphiraCare"
         >
           <div>
             <img
