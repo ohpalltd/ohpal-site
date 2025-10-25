@@ -1,6 +1,22 @@
-import Link from "next/link";
+'use client'
+
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const handleSapphiraCareClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    document.body.style.opacity = "0"
+    document.body.style.transition = "opacity 0.5s ease"
+    setTimeout(() => router.push("/sapphiracare"), 250)
+    setTimeout(() => {
+      document.body.style.opacity = "1"
+      document.body.style.transition = ""
+    }, 1000)
+  }
+
   return (
     <main
       style={{
@@ -18,7 +34,6 @@ export default function HomePage() {
         A seamless collaboration in Trade, Care, and Culture.
       </p>
 
-      {/* Branch grid */}
       <div
         style={{
           display: "flex",
@@ -64,17 +79,17 @@ export default function HomePage() {
           </p>
         </div>
 
-        {/* SapphiraCare (linked to /sapphiracare) */}
-        <Link
+        {/* SapphiraCare (fade transition to landing) */}
+        <a
           href="/sapphiracare"
+          onClick={handleSapphiraCareClick}
           style={{
             textDecoration: "none",
             color: "inherit",
             width: 180,
             display: "block",
+            cursor: "pointer",
           }}
-          prefetch={false}
-          aria-label="Go to SapphiraCare"
         >
           <div>
             <img
@@ -91,7 +106,7 @@ export default function HomePage() {
               Care and support services
             </p>
           </div>
-        </Link>
+        </a>
 
         {/* Citrinoor */}
         <div style={{ width: 180 }}>
@@ -111,5 +126,5 @@ export default function HomePage() {
         </div>
       </div>
     </main>
-  );
+  )
 }
