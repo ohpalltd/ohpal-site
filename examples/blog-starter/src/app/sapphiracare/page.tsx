@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, type ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -84,8 +84,19 @@ export default function SapphiraCareHome() {
         .page { position: relative; min-height: 100vh; overflow: hidden; background: var(--bg); color: #fff; }
 
         /* LEFT: landing area */
-        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 2rem; }
+        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 2rem; position: relative; }
         .landingHidden { opacity: 0; pointer-events: none; }
+
+        /* Back arrow on landing */
+        .backArrow {
+          position: absolute; top: 1.25rem; left: 1.25rem;
+          color: #fff; background: none; border: 1px solid transparent;
+          cursor: pointer; opacity: .9; line-height: 1; padding: .35rem; border-radius: .6rem;
+          transition: opacity .25s ease, transform .15s ease, background .25s ease, border-color .25s ease;
+          display: inline-flex; align-items: center; justify-content: center;
+        }
+        .backArrow:hover { opacity: 1; transform: translateX(-2px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+        .backArrow:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
 
         /* RIGHT: panel shell (chooser/prescreen) */
         .rightWrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding: 1.25rem; }
@@ -177,6 +188,21 @@ export default function SapphiraCareHome() {
           ].join(' ')}
           aria-hidden={!(stage === 'landing' || anim === 'landing→chooser' || anim === 'toLanding')}
         >
+          {/* SVG Back Arrow to Ohpal Home */}
+          <button
+            className="backArrow"
+            onClick={() => router.push('/')}
+            aria-label="Back to Ohpal Home"
+            type="button"
+          >
+            <svg
+              width="22" height="22" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+            >
+              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
           <div style={{ textAlign: 'center', maxWidth: 720 }}>
             <img
               src="/SapphiracareTransparentLogo.png"
@@ -314,7 +340,7 @@ export default function SapphiraCareHome() {
   )
 }
 
-function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
+function Field({ label, id, children }: { label: string; id: string; children: ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
       <label htmlFor={id} style={{ fontWeight: 600 }}>{label}</label>
