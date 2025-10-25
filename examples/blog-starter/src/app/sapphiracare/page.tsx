@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, ChangeEvent, FormEvent, type ReactNode } from 'react'
+import { useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -81,21 +81,22 @@ export default function SapphiraCareHome() {
     <>
       <style>{`
         :root { --bg:#0a0a0a; --panel:#0b0c10; --muted:#cbd5e1; --line:rgba(255,255,255,.14); --dur:${DURATION_MS}ms; }
-        .page { position: relative; min-height: 100vh; overflow: hidden; background: var(--bg); color: #fff; }
+        .page { position: relative; min-height: 100vh; overflow-x: hidden; background: var(--bg); color: #fff; }
 
         /* LEFT: landing area */
         .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 2rem; position: relative; }
         .landingHidden { opacity: 0; pointer-events: none; }
 
-        /* Back arrow on landing */
+        /* Back arrow - now FIXED so it follows on scroll */
         .backArrow {
-          position: absolute; top: 1.25rem; left: 1.25rem;
-          color: #fff; background: none; border: 1px solid transparent;
-          cursor: pointer; opacity: .9; line-height: 1; padding: .35rem; border-radius: .6rem;
+          position: fixed; top: 1rem; left: 1rem; z-index: 50;
+          color: #fff; background: rgba(11,12,16,0.55); border: 1px solid rgba(255,255,255,.18);
+          backdrop-filter: blur(6px);
+          cursor: pointer; opacity: .95; line-height: 1; padding: .4rem; border-radius: .6rem;
           transition: opacity .25s ease, transform .15s ease, background .25s ease, border-color .25s ease;
           display: inline-flex; align-items: center; justify-content: center;
         }
-        .backArrow:hover { opacity: 1; transform: translateX(-2px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+        .backArrow:hover { opacity: 1; transform: translateX(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
         .backArrow:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
 
         /* RIGHT: panel shell (chooser/prescreen) */
@@ -137,6 +138,7 @@ export default function SapphiraCareHome() {
         @media (max-width: 640px) {
           .landingWrap { padding: 1.25rem .75rem; }
           .panel { width: 100%; }
+          .backArrow { top: .75rem; left: .75rem; padding: .35rem; }
         }
 
         /* ---- Directional cross-fade keyframes (uniform) ---- */
@@ -188,12 +190,13 @@ export default function SapphiraCareHome() {
           ].join(' ')}
           aria-hidden={!(stage === 'landing' || anim === 'landing→chooser' || anim === 'toLanding')}
         >
-          {/* SVG Back Arrow to Ohpal Home */}
+          {/* SVG Back Arrow to Ohpal Home (FIXED) */}
           <button
             className="backArrow"
             onClick={() => router.push('/')}
             aria-label="Back to Ohpal Home"
             type="button"
+            title="Back to Ohpal Home"
           >
             <svg
               width="22" height="22" viewBox="0 0 24 24" fill="none"
