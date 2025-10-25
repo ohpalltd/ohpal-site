@@ -1,88 +1,130 @@
-import Image from "next/image";
-import Link from "next/link";
+'use client'
 
-export const metadata = {
-  title: "Ohpal International Ltd",
-  description: "A seamless collaboration in Trade, Care and Culture."
-};
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function HomePage() {
+  const router = useRouter()
+
+  const handleSapphiraCareClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    document.body.style.opacity = "0"
+    document.body.style.transition = "opacity 0.5s ease"
+    setTimeout(() => router.push("/sapphiracare"), 250)
+    setTimeout(() => {
+      document.body.style.opacity = "1"
+      document.body.style.transition = ""
+    }, 1000)
+  }
+
   return (
     <main
       style={{
         minHeight: "100vh",
         backgroundColor: "#0a0a0a",
         color: "white",
-        padding: "3rem 1rem"
+        textAlign: "center",
+        padding: "3rem 1rem",
       }}
     >
-      <section style={{ maxWidth: 1200, margin: "0 auto", textAlign: "center" }}>
-        <Image
-          src="/Ohpal2DTransparentHero.png"
-          alt="Ohpal"
-          width={220}
-          height={220}
-          priority
-          style={{ opacity: 0.95 }}
-        />
-        <h1 style={{ margin: "1rem 0 0.25rem", fontSize: "clamp(24px, 3vw, 36px)" }}>
-          A seamless collaboration in Trade, Care and Culture
-        </h1>
-        <p style={{ opacity: 0.8, maxWidth: 800, margin: "0.5rem auto 2rem" }}>
-          We’re a collective grounded in real life experience, deep care and a shared vision for something better.
-        </p>
+      <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>
+        Ohpal International Ltd
+      </h1>
+      <p style={{ color: "#ccc", marginBottom: "3rem", fontSize: "1.05rem" }}>
+        A seamless collaboration in Trade, Care, and Culture.
+      </p>
 
-        <div
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "start",
+          flexWrap: "wrap",
+          gap: "3rem",
+          maxWidth: "980px",
+          margin: "0 auto",
+        }}
+      >
+        {/* Peridotrepid */}
+        <div style={{ width: 180 }}>
+          <img
+            src="/Peridotrepid.png"
+            alt="Peridotrepid"
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
+          />
+          <p style={{ fontWeight: 600 }}>Peridotrepid</p>
+          <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
+            Logistics and procurement
+          </p>
+        </div>
+
+        {/* Carneliana */}
+        <div style={{ width: 180 }}>
+          <img
+            src="/Carneliana.png"
+            alt="Carneliana"
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
+          />
+          <p style={{ fontWeight: 600 }}>Carneliana</p>
+          <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
+            Wellness and medical travel
+          </p>
+        </div>
+
+        {/* SapphiraCare (fade transition to landing) */}
+        <a
+          href="/sapphiracare"
+          onClick={handleSapphiraCareClick}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-            gap: "1.25rem",
-            alignItems: "center",
-            justifyItems: "center"
+            textDecoration: "none",
+            color: "inherit",
+            width: 180,
+            display: "block",
+            cursor: "pointer",
           }}
         >
-          <Link href="/carneliana" style={{ textAlign: "center" }}>
-            <Image
-              src="/Carneliana.png"
-              alt="Carneliana"
-              width={240}
-              height={240}
-            />
-            <div style={{ marginTop: 8, opacity: 0.85 }}>Carneliana</div>
-          </Link>
-
-          <Link href="/citrinoor" style={{ textAlign: "center" }}>
-            <Image
-              src="/Citrinoor.png"
-              alt="Citrinoor"
-              width={240}
-              height={240}
-            />
-            <div style={{ marginTop: 8, opacity: 0.85 }}>Citrinoor</div>
-          </Link>
-
-          {/* This is the important one — goes straight to /sapphiracare */}
-          <Link href="/sapphiracare" style={{ textAlign: "center" }}>
-            <Image
-              src="/Sapphiracare.png"
+          <div>
+            <img
+              src="/SapphiraCare.png"
               alt="SapphiraCare"
-              width={240}
-              height={240}
+              style={{
+                width: "100%",
+                borderRadius: 10,
+                marginBottom: "0.75rem",
+              }}
             />
-            <div style={{ marginTop: 8, opacity: 0.85 }}>SapphiraCare</div>
-          </Link>
+            <p style={{ fontWeight: 600 }}>SapphiraCare</p>
+            <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
+              Care and support services
+            </p>
+          </div>
+        </a>
 
-          <Link href="/peridotrepid" style={{ textAlign: "center" }}>
-            <Image
-              src="/Peridotrepid.png"
-              alt="Peridotrepid"
-              width={240}
-              height={240}
-            />
-            <div style={{ marginTop: 8, opacity: 0.85 }}>Peridotrepid</div>
-          </Link>
+        {/* Citrinoor */}
+        <div style={{ width: 180 }}>
+          <img
+            src="/Citrinoor.png"
+            alt="Citrinoor"
+            style={{
+              width: "100%",
+              borderRadius: 10,
+              marginBottom: "0.75rem",
+            }}
+          />
+          <p style={{ fontWeight: 600 }}>Citrinoor</p>
+          <p style={{ color: "#bbb", fontSize: "0.9rem" }}>
+            Community and philanthropy
+          </p>
         </div>
-      </section>
+      </div>
     </main>
-  );
+  )
 }
