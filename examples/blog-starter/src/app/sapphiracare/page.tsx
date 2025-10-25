@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, type ChangeEvent, type FormEvent, type ReactNode } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 type Stage = 'landing' | 'chooser' | 'prescreen'
@@ -13,17 +12,17 @@ type Anim =
   | 'prescreen→chooser'
   | 'toLanding' // from chooser or prescreen back to landing
 
-const DURATION_MS = 2100 // slightly faster but still flowy
+const DURATION_MS = 2100 // smooth, not too fast
 
-export default function SapphiraCareHome() {
+export default function SapphiraCarePage() {
   const router = useRouter()
+
+  // stage and animation state
   const [stage, setStage] = useState<Stage>('landing')
   const [role, setRole] = useState<Role>(null)
-
-  // animation state
   const [anim, setAnim] = useState<Anim>('idle')
 
-  // prescreen form state
+  // prescreen form
   const [form, setForm] = useState({ fullName: '', dob: '', city: '' })
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -35,7 +34,7 @@ export default function SapphiraCareHome() {
     alert(`Submitted for ${role ?? 'role'}: ${form.fullName}, ${form.dob}, ${form.city}`)
   }
 
-  // ---- Keep your function names; trigger animation then flip stage ----
+  // transitions
   const startSignup = () => {
     setAnim('landing→chooser')
     setTimeout(() => {
@@ -71,7 +70,7 @@ export default function SapphiraCareHome() {
     }, DURATION_MS)
   }
 
-  // keep right panel mounted during transitions
+  // keep the right panel mounted during transitions
   const showPanel =
     stage !== 'landing' ||
     anim === 'landing→chooser' ||
@@ -81,23 +80,24 @@ export default function SapphiraCareHome() {
     <>
       <style>{`
         :root { --bg:#0a0a0a; --panel:#0b0c10; --muted:#cbd5e1; --line:rgba(255,255,255,.14); --dur:${DURATION_MS}ms; }
+        html, body { background: var(--bg); }
         .page { position: relative; min-height: 100vh; overflow-x: hidden; background: var(--bg); color: #fff; }
 
-        /* LEFT: landing area */
-        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 2rem; position: relative; }
-        .landingHidden { opacity: 0; pointer-events: none; }
-
-        /* Back arrow - now FIXED so it follows on scroll */
+        /* GLOBAL Back Arrow - fixed so it always follows on scroll and through transitions */
         .backArrow {
           position: fixed; top: 1rem; left: 1rem; z-index: 50;
           color: #fff; background: rgba(11,12,16,0.55); border: 1px solid rgba(255,255,255,.18);
           backdrop-filter: blur(6px);
-          cursor: pointer; opacity: .95; line-height: 1; padding: .4rem; border-radius: .6rem;
+          cursor: pointer; opacity: .95; line-height: 1; padding: .45rem; border-radius: .65rem;
           transition: opacity .25s ease, transform .15s ease, background .25s ease, border-color .25s ease;
           display: inline-flex; align-items: center; justify-content: center;
         }
         .backArrow:hover { opacity: 1; transform: translateX(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
         .backArrow:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
+
+        /* LEFT: landing area */
+        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 3.5rem 2rem 2rem; position: relative; text-align: center; }
+        .landingHidden { opacity: 0; pointer-events: none; }
 
         /* RIGHT: panel shell (chooser/prescreen) */
         .rightWrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding: 1.25rem; }
@@ -136,7 +136,7 @@ export default function SapphiraCareHome() {
         .x { background:none; border:1px solid var(--line); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; }
 
         @media (max-width: 640px) {
-          .landingWrap { padding: 1.25rem .75rem; }
+          .landingWrap { padding: 3.25rem .9rem 1.25rem; }
           .panel { width: 100%; }
           .backArrow { top: .75rem; left: .75rem; padding: .35rem; }
         }
@@ -176,6 +176,22 @@ export default function SapphiraCareHome() {
       `}</style>
 
       <main className="page">
+        {/* Fixed global back arrow (independent of stage/animations) */}
+        <button
+          className="backArrow"
+          onClick={() => router.push('/')}
+          aria-label="Back to Ohpal Home"
+          type="button"
+          title="Back to Ohpal Home"
+        >
+          <svg
+            width="22" height="22" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
+          >
+            <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
+
         {/* LEFT: landing */}
         <section
           className={[
@@ -190,26 +206,11 @@ export default function SapphiraCareHome() {
           ].join(' ')}
           aria-hidden={!(stage === 'landing' || anim === 'landing→chooser' || anim === 'toLanding')}
         >
-          {/* SVG Back Arrow to Ohpal Home (FIXED) */}
-          <button
-            className="backArrow"
-            onClick={() => router.push('/')}
-            aria-label="Back to Ohpal Home"
-            type="button"
-            title="Back to Ohpal Home"
-          >
-            <svg
-              width="22" height="22" viewBox="0 0 24 24" fill="none"
-              xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
-            >
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </button>
-
           <div style={{ textAlign: 'center', maxWidth: 720 }}>
             <img
-              src="/SapphiracareTransparentLogo.png"
+              src="/SapphiraCareTransparentLogo.png"
               alt="SapphiraCare Logo"
+              onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/SapphiracareTransparentLogo.png' }}
               style={{ width: '220px', marginBottom: '1.2rem', opacity: 0.95, maxWidth: '80%' }}
             />
             <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>
@@ -221,8 +222,9 @@ export default function SapphiraCareHome() {
               secure, and human.
             </p>
             <div className="row" style={{ marginBottom: '.5rem' }}>
-              <Link href="/login?role=USER" className="btn btn--solid">User login</Link>
-              <Link href="/login?role=CONTRACTOR" className="btn btn--ghost">Contractor login</Link>
+              {/* Keep your external login routes as-is */}
+              <a href="/login?role=USER" className="btn btn--solid">User login</a>
+              <a href="/login?role=CONTRACTOR" className="btn btn--ghost">Contractor login</a>
               <button className="btn btn--ghost" onClick={startSignup}>Sign up</button>
             </div>
             <small style={{ color: '#9ca3af' }}>
@@ -271,7 +273,7 @@ export default function SapphiraCareHome() {
                     </button>
                   </div>
 
-                  {/* FINAL DISCLAIMER */}
+                  {/* Friendly privacy line */}
                   <p className="muted" style={{ marginTop: 14, fontSize: 13, lineHeight: 1.5 }}>
                     We value your privacy and handle your details with care. Your information will never be shared with
                     marketing firms or external agencies.
