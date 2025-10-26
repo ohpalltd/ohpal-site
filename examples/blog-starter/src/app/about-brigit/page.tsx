@@ -155,7 +155,7 @@ As a mother, I find immense joy and purpose in nurturing my family, and as a pro
           }}
         />
         <img
-          src="/SapphiraCare.png"
+          src="/SapphiraCareTransparent.png"
           alt="SapphiraCare Logo"
           style={{
             width: '120px',
