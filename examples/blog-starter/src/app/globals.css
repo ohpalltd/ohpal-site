@@ -1,48 +1,87 @@
+/* ===== Ohpal Global Styles (FULL FILE) ===========================
+   Loads the official brand font: "TheSeasons" (no space) from:
+   /public/TheSeasonsFont/*.otf
+   Applies it globally (including buttons/inputs).
+   ================================================================ */
+
+/* Regular */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-reg.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
+/* Bold */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-bd.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
+/* Italic */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-it.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
+/* Bold Italic */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-bdit.otf') format('opentype');
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 
+/* Light */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-lt.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
+/* Light Italic */
 @font-face {
   font-family: 'TheSeasons';
   src: url('/TheSeasonsFont/theseasons-ltit.otf') format('opentype');
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 
-body {
-  font-family: 'TheSeasons', serif;
+/* ---- Base ---- */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-family: 'TheSeasons', serif; /* ✅ brand font everywhere */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Ensure UI controls inherit the brand font (fixes the "Sign up" mismatch) */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+/* Keep links inheriting colour unless styled elsewhere */
+a { color: inherit; text-decoration: none; }
+
+/* Images scale nicely by default */
+img { max-width: 100%; display: block; }
+
+/* ================== Existing site styles (kept) ================== */
 
 /* Mobile-friendly hero sizing */
 .hero {
@@ -87,7 +126,7 @@ body {
   backdrop-filter: blur(3px);
 }
 
-/* Branch grid already good, but tighten on narrow screens */
+/* Branch grid */
 .branchesGrid {
   display: grid;
   gap: 1.25rem;
