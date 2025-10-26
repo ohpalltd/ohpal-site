@@ -129,7 +129,7 @@ export default function AboutBrigitPage() {
             }}
           >
             <img
-              src="/CarnelianaTransparent.png"
+              src="/Carneliana.png"
               alt="Carneliana Logo"
               style={{
                 width: '100px',
@@ -138,7 +138,7 @@ export default function AboutBrigitPage() {
               }}
             />
             <img
-              src="/SapphiraCareTransparent.png"
+              src="/SapphiraCare.png"
               alt="SapphiraCare Logo"
               style={{
                 width: '100px',
