@@ -86,7 +86,7 @@ export default function SapphiraCarePage() {
 
       <style>{`
         :root { --bg:#0a0a0a; --panel:#0b0c10; --muted:#cbd5e1; --line:rgba(255,255,255,.14); --dur:${DURATION_MS}ms; }
-        html, body { background: var(--bg); }
+        html, body { background: var(--bg); font-family: 'TheSeasons', serif; }
         .page { position: relative; min-height: 100vh; overflow-x: hidden; background: var(--bg); color: #fff; }
 
         /* Fixed back arrow */
@@ -106,6 +106,16 @@ export default function SapphiraCarePage() {
         .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 3.5rem 1.25rem 2rem; position: relative; text-align: center; }
         .landingHidden { opacity: 0; pointer-events: none; }
 
+        /* Responsive, larger logo */
+        .logo {
+          width: clamp(220px, 45vw, 380px);  /* bigger on desktop, scales down on mobile */
+          max-width: 90vw;
+          height: auto;
+          margin: 0 auto 1.2rem;
+          opacity: 0.95;
+          display: block;
+        }
+
         /* Right panel shell */
         .rightWrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding: 1rem; }
         .panel {
@@ -114,11 +124,12 @@ export default function SapphiraCarePage() {
           box-shadow: 0 18px 50px rgba(0,0,0,.55);
           padding: 18px 18px 20px; position: relative;
           opacity: 0; pointer-events: none;
+          font-family: 'TheSeasons', serif;
         }
         .panel.show { opacity: 1; pointer-events: auto; }
 
         .header { display:flex; align-items:center; justify-content: space-between; margin-bottom: 10px; }
-        .header h1 { font-size: 1.6rem; margin: 0; line-height: 1.2; }
+        .header h1 { font-size: 1.6rem; margin: 0; line-height: 1.2; font-family: 'TheSeasons', serif; }
         .header h1::before { content: none; } /* kill any rogue bullet/marker causing a leading dot */
         .x { background:none; border:1px solid var(--line); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; }
 
@@ -129,7 +140,7 @@ export default function SapphiraCarePage() {
           display: inline-flex; align-items: center; justify-content: center;
           padding: .8rem 1.1rem; border-radius: .8rem; border: 1px solid #fff; color: #fff;
           text-decoration: none; font-weight: 600; font-size: 16px; /* >=16px avoids iOS zoom */
-          min-height: 44px;
+          min-height: 44px; font-family: 'TheSeasons', serif;
         }
         .btn--solid { background: #fff; color: #000; border-color: #fff; }
         .btn--ghost { background: transparent; }
@@ -140,7 +151,7 @@ export default function SapphiraCarePage() {
         .opt {
           width: 100%; text-align: left; padding: 14px 16px; cursor: pointer;
           border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.06);
-          color: #ffffff; font-size: 16px; min-height: 44px;
+          color: #ffffff; font-size: 16px; min-height: 44px; font-family: 'TheSeasons', serif;
         }
         .opt__title { display:block; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
         .opt__sub { display:block; font-size: 13px; opacity: .95; color: #ffffff; }
@@ -183,6 +194,7 @@ export default function SapphiraCarePage() {
           color: #fff;
           font-size: 16px; /* >=16px to avoid iOS zoom */
           min-height: 44px;
+          font-family: 'TheSeasons', serif;
         }
 
         /* MOBILE REFINEMENTS */
@@ -200,6 +212,9 @@ export default function SapphiraCarePage() {
           .actions { display: flex; gap: 10px; }
           .actions .btn { flex: 1; }
           .actions--stack { flex-direction: column; }
+
+          /* Slightly smaller mobile logo */
+          .logo { width: clamp(180px, 60vw, 280px); margin-bottom: 1rem; }
         }
 
         /* Respect safe area at the bottom on iOS */
@@ -245,13 +260,13 @@ export default function SapphiraCarePage() {
             <img
               src="/SapphiraCareTransparentLogo.png"
               alt="SapphiraCare Logo"
+              className="logo"
               onError={(e) => { (e.currentTarget as HTMLImageElement).src = '/SapphiracareTransparentLogo.png' }}
-              style={{ width: '220px', marginBottom: '1.2rem', opacity: 0.95, maxWidth: '80%' }}
             />
-            <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem', fontFamily: 'TheSeasons, serif' }}>
               SapphiraCare
             </h1>
-            <p style={{ color: '#d1d5db', lineHeight: 1.7, marginBottom: '1.5rem' }}>
+            <p style={{ color: '#d1d5db', lineHeight: 1.7, marginBottom: '1.5rem', fontFamily: 'TheSeasons, serif' }}>
               SapphiraCare is Ohpal’s dedicated branch for care and support services. We connect communities,
               contractors, and care recipients through trust, accessibility, and heart — making quality care simple,
               secure, and human.
