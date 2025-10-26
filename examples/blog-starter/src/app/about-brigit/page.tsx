@@ -15,7 +15,7 @@ export default function AboutBrigitPage() {
         fontFamily: 'TheSeasons, serif',
       }}
     >
-      {/* Fixed back arrow */}
+      {/* Back Button */}
       <button
         onClick={() => router.push('/')}
         aria-label="Back to Home"
@@ -41,36 +41,89 @@ export default function AboutBrigitPage() {
         </svg>
       </button>
 
-      {/* Header */}
+      {/* Header Section */}
       <header style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+        <h2
+          style={{
+            fontSize: '1.25rem',
+            color: '#b0b0b0',
+            marginBottom: '.75rem',
+            letterSpacing: '.5px',
+          }}
+        >
+          Meet our strategist — Brigitta Husseini
+        </h2>
+
         <img
-          src="/brigitwork.png"
-          alt="Brigit — Strategic, compassionate, and purpose-driven"
+          src="/brigitwork.PNG"
+          alt="Brigitta Husseini — Strategic, compassionate, and purpose-driven"
           style={{
             width: 'min(960px, 92vw)',
             height: 'auto',
             borderRadius: 16,
             display: 'block',
-            margin: '0 auto 1rem',
+            margin: '0 auto 1.5rem',
             boxShadow: '0 18px 60px rgba(0,0,0,.55)',
           }}
         />
-        <h1 style={{ fontSize: '2rem', margin: '.25rem 0 .5rem', fontWeight: 700 }}>
-          Brigit — Strategic, compassionate, and purpose-driven
-        </h1>
 
-        {/* ✨ Brigit's Bio */}
-        <p
+        <h1
           style={{
-            color: '#d1d5db',
-            maxWidth: 880,
-            margin: '0 auto',
-            lineHeight: 1.8,
-            fontSize: '1.05rem',
+            fontSize: '2rem',
+            margin: '.25rem 0 1rem',
+            fontWeight: 700,
             textAlign: 'center',
-            whiteSpace: 'pre-line',
           }}
         >
+          Brigit — Strategic, compassionate, and purpose-driven
+        </h1>
+      </header>
+
+      {/* Focus Areas */}
+      <section
+        style={{
+          maxWidth: 800,
+          margin: '0 auto 2rem',
+          textAlign: 'center',
+        }}
+      >
+        <h3
+          style={{
+            fontSize: '1.3rem',
+            fontWeight: 600,
+            marginBottom: '.75rem',
+            color: '#fff',
+          }}
+        >
+          Focus Areas
+        </h3>
+        <ul
+          style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: '0 auto 2rem',
+            lineHeight: 1.8,
+            color: '#d1d5db',
+            fontSize: '1.05rem',
+          }}
+        >
+          <li>Carneliana – Wellness & Medical Travel</li>
+          <li>SapphiraCare – Care & Support Services</li>
+        </ul>
+      </section>
+
+      {/* Bio Section */}
+      <section
+        style={{
+          textAlign: 'center',
+          color: '#d1d5db',
+          lineHeight: 1.8,
+          maxWidth: 900,
+          margin: '0 auto',
+          fontSize: '1.05rem',
+          whiteSpace: 'pre-line',
+        }}
+      >
 {`Salam, I’m Brigit, a proud Lebanese-Australian who has had the privilege of growing up in Lebanon and building a life in Australia. My upbringing instilled in me the importance of resilience, community, and living by my values—principles that continue to guide me today.
 
 As a dynamic corporate leader, I bring extensive experience spanning strategic sales management in the telecommunications industry and serving as General Manager for a leading manufacturing company. These roles have allowed me to develop a proven track record of driving business growth, building strong client relationships, and leading teams to exceed performance goals.
@@ -78,10 +131,9 @@ As a dynamic corporate leader, I bring extensive experience spanning strategic s
 Over time, I realized that true fulfillment comes from aligning my work with my values. This inspired me to co-found Ohpal International Ltd., a company dedicated to fostering global connections and promoting sustainable development through innovative partnerships. With SapphiraCare and Carneliana under my leadership, I channel my expertise into making a meaningful difference, blending purpose with action.
 
 As a mother, I find immense joy and purpose in nurturing my family, and as a professional, I am deeply committed to creating opportunities, uplifting others, and building a legacy of positive change. Fluent in English and Arabic, I draw upon my multicultural background to foster trust and collaboration in diverse markets.`}
-        </p>
-      </header>
+      </section>
 
-      {/* Logos below hero */}
+      {/* Logos */}
       <section
         style={{
           display: 'flex',
@@ -103,7 +155,7 @@ As a mother, I find immense joy and purpose in nurturing my family, and as a pro
           }}
         />
         <img
-          src="/SapphiraCareTransparent.png"
+          src="/SapphiraCare.png"
           alt="SapphiraCare Logo"
           style={{
             width: '120px',
@@ -111,27 +163,6 @@ As a mother, I find immense joy and purpose in nurturing my family, and as a pro
             opacity: 0.9,
           }}
         />
-      </section>
-
-      {/* Focus Areas */}
-      <section style={{ maxWidth: 1000, margin: '2rem auto', display: 'grid', gap: '1rem' }}>
-        <article
-          style={{
-            border: '1px solid rgba(255,255,255,.14)',
-            background: 'rgba(255,255,255,.04)',
-            borderRadius: 16,
-            boxShadow: '0 12px 40px rgba(0,0,0,.45)',
-            padding: '1.25rem 1.4rem',
-          }}
-        >
-          <h2 style={{ margin: '0 0 .75rem', fontSize: '1.3rem', fontWeight: 700 }}>
-            Focus Areas
-          </h2>
-          <ul style={{ margin: 0, paddingLeft: '1.1rem', lineHeight: 1.7, color: '#cfd5db' }}>
-            <li>Carneliana – Wellness & medical travel</li>
-            <li>SapphiraCare – Care & support services</li>
-          </ul>
-        </article>
       </section>
     </main>
   )
