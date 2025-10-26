@@ -146,7 +146,7 @@ As a mother, I find immense joy and purpose in nurturing my family, and as a pro
         }}
       >
         <img
-          src="/CarnelianaTransparent.png"
+          src="/Carneliana.png"
           alt="Carneliana Logo"
           style={{
             width: '120px',
@@ -155,7 +155,7 @@ As a mother, I find immense joy and purpose in nurturing my family, and as a pro
           }}
         />
         <img
-          src="/SapphiraCareTransparent.png"
+          src="/SapphiraCare.png"
           alt="SapphiraCare Logo"
           style={{
             width: '120px',
