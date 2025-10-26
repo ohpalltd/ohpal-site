@@ -17,7 +17,7 @@ const DURATION_MS = 2100 // smooth, not too fast
 export default function SapphiraCarePage() {
   const router = useRouter()
 
-  // stage and animation state
+  // stage & animation
   const [stage, setStage] = useState<Stage>('landing')
   const [role, setRole] = useState<Role>(null)
   const [anim, setAnim] = useState<Anim>('idle')
@@ -70,7 +70,6 @@ export default function SapphiraCarePage() {
     }, DURATION_MS)
   }
 
-  // keep the right panel mounted during transitions
   const showPanel =
     stage !== 'landing' ||
     anim === 'landing→chooser' ||
@@ -78,19 +77,9 @@ export default function SapphiraCarePage() {
 
   return (
     <>
-      {/* PAGE-SCOPED GLOBAL OVERRIDE:
-         Hide any Ohpal header/hero/learn-more that the root layout might render.
-         This CSS only exists on /sapphiracare, so it won't affect other routes. */}
+      {/* Hide any global Ohpal hero/header on this route only */}
       <style jsx global>{`
-        header,
-        .site-header,
-        .ohpalHeader,
-        .ohpal-hero,
-        .home-hero,
-        .hero,
-        .learnMore,
-        .learn-more,
-        .ohpal-cta {
+        header, .site-header, .ohpalHeader, .ohpal-hero, .home-hero, .hero, .learnMore, .learn-more, .ohpal-cta {
           display: none !important;
         }
       `}</style>
@@ -100,80 +89,63 @@ export default function SapphiraCarePage() {
         html, body { background: var(--bg); }
         .page { position: relative; min-height: 100vh; overflow-x: hidden; background: var(--bg); color: #fff; }
 
-        /* GLOBAL Back Arrow - fixed so it always follows on scroll and through transitions */
+        /* Fixed back arrow */
         .backArrow {
-          position: fixed; top: 1rem; left: 1rem; z-index: 50;
+          position: fixed; top: max(12px, env(safe-area-inset-top)); left: max(12px, env(safe-area-inset-left));
+          z-index: 50;
           color: #fff; background: rgba(11,12,16,0.55); border: 1px solid rgba(255,255,255,.18);
           backdrop-filter: blur(6px);
-          cursor: pointer; opacity: .95; line-height: 1; padding: .45rem; border-radius: .65rem;
+          cursor: pointer; opacity: .95; line-height: 1; padding: .5rem; border-radius: .7rem;
           transition: opacity .25s ease, transform .15s ease, background .25s ease, border-color .25s ease;
           display: inline-flex; align-items: center; justify-content: center;
         }
         .backArrow:hover { opacity: 1; transform: translateX(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
         .backArrow:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
 
-        /* LEFT: landing area */
-        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 3.5rem 2rem 2rem; position: relative; text-align: center; }
+        /* Landing column */
+        .landingWrap { width: 100%; min-height: 100vh; display:flex; align-items:center; justify-content:center; padding: 3.5rem 1.25rem 2rem; position: relative; text-align: center; }
         .landingHidden { opacity: 0; pointer-events: none; }
 
-        /* RIGHT: panel shell (chooser/prescreen) */
-        .rightWrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding: 1.25rem; }
-
+        /* Right panel shell */
+        .rightWrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding: 1rem; }
         .panel {
           width: 92%; max-width: 560px; background: var(--panel);
           border: 1px solid var(--line); border-radius: 18px;
           box-shadow: 0 18px 50px rgba(0,0,0,.55);
-          padding: 18px 18px 22px; position: relative;
+          padding: 18px 18px 20px; position: relative;
           opacity: 0; pointer-events: none;
         }
         .panel.show { opacity: 1; pointer-events: auto; }
 
-        .panel h1 { font-size: 1.6rem; margin: 0 0 .75rem; }
+        .header { display:flex; align-items:center; justify-content: space-between; margin-bottom: 10px; }
+        .header h1 { font-size: 1.6rem; margin: 0; line-height: 1.2; }
+        .header h1::before { content: none; } /* kill any rogue bullet/marker causing a leading dot */
+        .x { background:none; border:1px solid var(--line); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; }
+
         .muted { color: var(--muted); }
 
-        /* buttons */
+        /* Buttons */
         .btn {
           display: inline-flex; align-items: center; justify-content: center;
-          padding: .75rem 1.25rem; border-radius: .75rem; border: 1px solid #fff; color: #fff; text-decoration: none; font-weight: 600;
+          padding: .8rem 1.1rem; border-radius: .8rem; border: 1px solid #fff; color: #fff;
+          text-decoration: none; font-weight: 600; font-size: 16px; /* >=16px avoids iOS zoom */
+          min-height: 44px;
         }
         .btn--solid { background: #fff; color: #000; border-color: #fff; }
         .btn--ghost { background: transparent; }
+
         .row { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: center; }
 
-        /* chooser options */
+        /* Chooser options */
         .opt {
           width: 100%; text-align: left; padding: 14px 16px; cursor: pointer;
           border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.06);
-          color: #ffffff;
+          color: #ffffff; font-size: 16px; min-height: 44px;
         }
         .opt__title { display:block; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
         .opt__sub { display:block; font-size: 13px; opacity: .95; color: #ffffff; }
 
-        .header { display:flex; align-items:center; justify-content: space-between; margin-bottom: 10px; }
-        .x { background:none; border:1px solid var(--line); color:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; }
-
-        @media (max-width: 640px) {
-          .landingWrap { padding: 3.25rem .9rem 1.25rem; }
-          .panel { width: 100%; }
-          .backArrow { top: .75rem; left: .75rem; padding: .35rem; }
-        }
-
-        /* ---- Directional cross-fade keyframes (uniform) ---- */
-        @keyframes fadeOutLeft  { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(-80px)} }
-        @keyframes fadeInRight  { 0% {opacity:0; transform:translateX(80px)} 100% {opacity:1; transform:translateX(0)} }
-        @keyframes fadeOutRight { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(80px)} }
-        @keyframes fadeInLeft   { 0% {opacity:0; transform:translateX(-80px)} 100% {opacity:1; transform:translateX(0)} }
-
-        /* Landing animations (container controls all its children uniformly) */
-        .landing--idle { opacity:1; transform:none; }
-        .landing--exitLeft { animation: fadeOutLeft var(--dur) ease both; }
-        .landing--enterLeft { animation: fadeInLeft var(--dur) ease both; }
-
-        /* Panel container animations (shell controls all inner content uniformly) */
-        .panel--enterRight { animation: fadeInRight var(--dur) ease both; }
-        .panel--exitRight  { animation: fadeOutRight var(--dur) ease both; }
-
-        /* Inner content panes (chooser/prescreen) — animate panes, not inner text */
+        /* Panes */
         .stack { position: relative; min-height: 320px; }
         .pane {
           position:absolute; inset:0;
@@ -183,17 +155,66 @@ export default function SapphiraCarePage() {
         }
         .pane.active { opacity:1; pointer-events:auto; }
 
+        /* Animations */
+        @keyframes fadeOutLeft  { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(-80px)} }
+        @keyframes fadeInRight  { 0% {opacity:0; transform:translateX(80px)} 100% {opacity:1; transform:translateX(0)} }
+        @keyframes fadeOutRight { 0% {opacity:1; transform:translateX(0)} 100% {opacity:0; transform:translateX(80px)} }
+        @keyframes fadeInLeft   { 0% {opacity:0; transform:translateX(-80px)} 100% {opacity:1; transform:translateX(0)} }
+
+        .landing--idle { opacity:1; transform:none; }
+        .landing--exitLeft { animation: fadeOutLeft var(--dur) ease both; }
+        .landing--enterLeft { animation: fadeInLeft var(--dur) ease both; }
+
+        .panel--enterRight { animation: fadeInRight var(--dur) ease both; }
+        .panel--exitRight  { animation: fadeOutRight var(--dur) ease both; }
+
         .pane.enter-right { animation: fadeInRight var(--dur) ease both; }
         .pane.enter-left  { animation: fadeInLeft  var(--dur) ease both; }
         .pane.exit-left   { animation: fadeOutLeft var(--dur) ease both; }
         .pane.exit-right  { animation: fadeOutRight var(--dur) ease both; }
 
-        /* Performance hint */
+        /* Inputs */
+        input[type="text"], input[type="date"] {
+          width: 100%;
+          padding: 0.8rem 0.9rem;
+          border-radius: 12px;
+          border: 1px solid rgba(255,255,255,.25);
+          background: rgba(255,255,255,.06);
+          color: #fff;
+          font-size: 16px; /* >=16px to avoid iOS zoom */
+          min-height: 44px;
+        }
+
+        /* MOBILE REFINEMENTS */
+        @media (max-width: 480px) {
+          .landingWrap { padding: 3.25rem 1rem 1.25rem; }
+          .header h1 { font-size: 1.35rem; }
+          .panel { width: 94%; padding: 16px 14px 16px; border-radius: 16px; }
+          .stack { min-height: 300px; }
+
+          /* Stack all buttons full-width to avoid clipping */
+          .row { flex-direction: column; align-items: stretch; gap: .6rem; }
+          .row .btn { width: 100%; }
+
+          /* Back/Submit row also stacks on very small screens */
+          .actions { display: flex; gap: 10px; }
+          .actions .btn { flex: 1; }
+          .actions--stack { flex-direction: column; }
+        }
+
+        /* Respect safe area at the bottom on iOS */
+        .page::after {
+          content: "";
+          display: block;
+          height: max(0px, env(safe-area-inset-bottom));
+        }
+
+        /* Performance */
         .landingWrap, .panel, .pane { will-change: opacity, transform; }
       `}</style>
 
       <main className="page">
-        {/* Fixed global back arrow (independent of stage/animations) */}
+        {/* Fixed back arrow */}
         <button
           className="backArrow"
           onClick={() => router.push('/')}
@@ -201,10 +222,7 @@ export default function SapphiraCarePage() {
           type="button"
           title="Back to Ohpal Home"
         >
-          <svg
-            width="22" height="22" viewBox="0 0 24 24" fill="none"
-            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"
-          >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
             <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
@@ -238,19 +256,21 @@ export default function SapphiraCarePage() {
               contractors, and care recipients through trust, accessibility, and heart — making quality care simple,
               secure, and human.
             </p>
+
+            {/* Login / CTA row (stacks on mobile via CSS) */}
             <div className="row" style={{ marginBottom: '.5rem' }}>
-              {/* Keep your external login routes as-is */}
               <a href="/login?role=USER" className="btn btn--solid">User login</a>
               <a href="/login?role=CONTRACTOR" className="btn btn--ghost">Contractor login</a>
               <button className="btn btn--ghost" onClick={startSignup}>Sign up</button>
             </div>
+
             <small style={{ color: '#9ca3af' }}>
               Do not have an account yet? Click <strong>Sign up</strong>.
             </small>
           </div>
         </section>
 
-        {/* RIGHT: chooser/prescreen shared shell, mounted during transitions */}
+        {/* RIGHT: chooser/prescreen panel */}
         {showPanel && (
           <section className="rightWrap" aria-hidden={false}>
             <div
@@ -267,7 +287,7 @@ export default function SapphiraCarePage() {
               </div>
 
               <div className="stack">
-                {/* CHOOSER PANE */}
+                {/* CHOOSER */}
                 <div
                   className={[
                     'pane',
@@ -290,14 +310,13 @@ export default function SapphiraCarePage() {
                     </button>
                   </div>
 
-                  {/* Friendly privacy line */}
                   <p className="muted" style={{ marginTop: 14, fontSize: 13, lineHeight: 1.5 }}>
                     We value your privacy and handle your details with care. Your information will never be shared with
                     marketing firms or external agencies.
                   </p>
                 </div>
 
-                {/* PRESCREEN PANE */}
+                {/* PRESCREEN */}
                 <div
                   className={[
                     'pane',
@@ -318,7 +337,6 @@ export default function SapphiraCarePage() {
                         value={form.fullName}
                         onChange={onChange}
                         required
-                        style={inputStyle}
                         placeholder="First and last name"
                       />
                     </Field>
@@ -331,7 +349,6 @@ export default function SapphiraCarePage() {
                         value={form.dob}
                         onChange={onChange}
                         required
-                        style={inputStyle}
                       />
                     </Field>
 
@@ -342,14 +359,14 @@ export default function SapphiraCarePage() {
                         value={form.city}
                         onChange={onChange}
                         required
-                        style={inputStyle}
                         placeholder="Your city"
                       />
                     </Field>
 
-                    <div style={{ display: 'flex', gap: 10 }}>
+                    {/* Actions: auto stack on mobile via CSS */}
+                    <div className="actions">
                       <button type="button" className="btn btn--ghost" onClick={backToChooser}>Back</button>
-                      <button type="submit" className="btn btn--solid" style={{ flex: 1 }}>Submit</button>
+                      <button type="submit" className="btn btn--solid">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -365,17 +382,8 @@ export default function SapphiraCarePage() {
 function Field({ label, id, children }: { label: string; id: string; children: ReactNode }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-      <label htmlFor={id} style={{ fontWeight: 600 }}>{label}</label>
+      <label htmlFor={id} style={{ fontWeight: 600, fontSize: 14 }}>{label}</label>
       {children}
     </div>
   )
-}
-
-const inputStyle: React.CSSProperties = {
-  padding: '0.7rem 0.8rem',
-  borderRadius: '12px',
-  border: '1px solid rgba(255,255,255,.25)',
-  background: 'rgba(255,255,255,.06)',
-  color: '#fff',
-  fontSize: '1rem',
 }
