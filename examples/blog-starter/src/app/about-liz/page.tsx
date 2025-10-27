@@ -17,7 +17,7 @@ export default function AboutLiz() {
         overflow: 'hidden',
       }}
     >
-      {/* Hide any global hero/header just in case */}
+      {/* hard-hide any global hero just in case */}
       <style jsx global>{`
         header, .hero, .ohpal-hero, .ohpalHeader, .learnMore, video, [class*="hero"] {
           display: none !important;
@@ -25,7 +25,7 @@ export default function AboutLiz() {
         html, body { background: #000 !important; }
       `}</style>
 
-      {/* Turn off ligatures */}
+      {/* disable ligatures to avoid weird symbols */}
       <style>{`
         .no-ligs {
           font-variant-ligatures: none;
@@ -34,7 +34,7 @@ export default function AboutLiz() {
         }
       `}</style>
 
-      {/* Side borders only */}
+      {/* SIDE BORDERS */}
       <img
         src="/dialeftsideborder.png"
         alt=""
@@ -45,7 +45,7 @@ export default function AboutLiz() {
           bottom: 0,
           left: 0,
           width: 'min(8vw, 120px)',
-          opacity: 0.4,
+          opacity: 0.4,          // make more or less opaque here
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -60,13 +60,13 @@ export default function AboutLiz() {
           bottom: 0,
           right: 0,
           width: 'min(8vw, 120px)',
-          opacity: 0.4,
+          opacity: 0.4,          // make more or less opaque here
           pointerEvents: 'none',
           zIndex: 1,
         }}
       />
 
-      {/* Back button to “Who we are” */}
+      {/* back button to Who we are */}
       <button
         onClick={() => router.push('/#who-we-are')}
         aria-label="Back to Who We Are"
@@ -88,14 +88,7 @@ export default function AboutLiz() {
           transition: '0.25s ease',
         }}
       >
-        <svg
-          width="22"
-          height="22"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
           <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
       </button>
@@ -106,7 +99,7 @@ export default function AboutLiz() {
           position: 'relative',
           zIndex: 2,
           display: 'flex',
-          flexDirection: 'row-reverse',
+          flexDirection: 'row-reverse', // image right, text left
           alignItems: 'center',
           justifyContent: 'center',
           gap: '3rem',
@@ -116,11 +109,11 @@ export default function AboutLiz() {
           flexWrap: 'wrap',
         }}
       >
-        {/* Right column: Liz’s image + logos */}
+        {/* right column: image + branch logos */}
         <div style={{ flex: '1 1 420px', maxWidth: 480, textAlign: 'center' }}>
           <img
             src="/lizlaptop.png"
-            alt="Elizabeth Faleafa"
+            alt="Liz Faleafa"
             style={{
               width: '100%',
               maxWidth: '360px',
@@ -143,61 +136,35 @@ export default function AboutLiz() {
           </div>
         </div>
 
-        {/* Left column: Heading + blurb */}
+        {/* left column: headings + blurb */}
         <div style={{ flex: '1 1 600px', maxWidth: 640, textAlign: 'left' }}>
-          <h2
-            className="no-ligs"
-            style={{
-              fontSize: '1.15rem',
-              color: '#d4d4d4',
-              marginBottom: '.5rem',
-              letterSpacing: '.4px',
-            }}
-          >
-            Meet our NZ Director — Liz Faleafa
+          <h2 className="no-ligs" style={{ fontSize: '1.15rem', color: '#d4d4d4', marginBottom: '.5rem', letterSpacing: '.4px' }}>
+            Meet our NZ Director, Liz Faleafa
           </h2>
 
-          <h1
-            className="no-ligs"
-            style={{
-              fontSize: '2rem',
-              margin: '.25rem 0 1rem',
-              fontWeight: 700,
-              lineHeight: 1.28,
-              color: '#fff',
-            }}
-          >
-            Liz — Tactical, visionary, and purpose driven
+          <h1 className="no-ligs" style={{ fontSize: '2rem', margin: '.25rem 0 1rem', fontWeight: 700, lineHeight: 1.28 }}>
+            Liz, tactical, visionary, and purpose driven
           </h1>
 
-          <div
-            className="no-ligs"
-            style={{
-              color: '#e5e5e5',
-              lineHeight: 1.8,
-              fontSize: '1.05rem',
-              textAlign: 'justify',
-            }}
-          >
+          <div className="no-ligs" style={{ color: '#e5e5e5', lineHeight: 1.8, fontSize: '1.05rem', textAlign: 'justify' }}>
             <p>
-              Mālō e lelei, I’m Liz — a proud Tongan-New Zealander and co-founder of Ohpal International Ltd.
-              My upbringing as a child of immigrants instilled in me the values of hard work, humility, and 
-              community — lessons that continue to guide my work and leadership today.
+              Malo e lelei, I am Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd.
+              My upbringing as a child of immigrants taught me hard work, humility, and the importance of community.
+              These values guide my leadership and my decisions every day.
             </p>
             <p>
-              With a background in logistics, procurement, and marketing operations, I’ve built my career 
-              around connecting people, processes, and purpose. I’m passionate about transforming complex 
-              systems into practical, human-centred solutions that create impact across borders.
+              My background is in logistics, procurement, and marketing operations.
+              I connect people, processes, and purpose.
+              I turn complex systems into practical solutions that serve real communities across borders.
             </p>
             <p>
-              At Ohpal, I lead with a tactical mindset — focusing on execution, compliance, and sustainable 
-              growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project 
-              reflects a balance of structure and compassion, grounded in integrity and long-term vision.
+              At Ohpal I lead with a tactical mindset focused on execution, compliance, and sustainable growth
+              under our trade and philanthropic branches, Peridotrepid and Citrinoor.
+              Every project is built with structure, compassion, integrity, and a long term vision.
             </p>
             <p>
-              As a mother and entrepreneur, I believe in building systems that work not just for profit, 
-              but for people. My mission is to bridge cultures, empower communities, and ensure that 
-              everything we build contributes to something lasting and meaningful.
+              As a mother and an entrepreneur, I build for people first, not only for profit.
+              My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
             </p>
           </div>
         </div>
