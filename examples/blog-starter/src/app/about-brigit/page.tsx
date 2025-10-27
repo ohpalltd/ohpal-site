@@ -10,20 +10,27 @@ export default function AboutBrigit() {
       style={{
         position: 'relative',
         minHeight: '100vh',
-        backgroundColor: '#0a0a0a',
-        color: '#fff',
+        backgroundColor: '#000000', // pure black background
+        color: '#ffffff',
         fontFamily: 'TheSeasons, serif',
         padding: '3rem 1.5rem 4rem',
         overflow: 'hidden',
       }}
     >
-      {/* Remove any Ohpal banner remnants */}
+      {/* Force hide Ohpal hero/banner */}
       <style jsx global>{`
-        header, .hero, .ohpal-hero, .ohpalHeader, .learnMore, video, [class*="hero"] {
+        header,
+        .hero,
+        .ohpal-hero,
+        .ohpalHeader,
+        .learnMore,
+        video,
+        [class*='hero'] {
           display: none !important;
         }
-        html, body {
-          background: #0a0a0a !important;
+        html,
+        body {
+          background: #000 !important;
         }
       `}</style>
 
@@ -32,26 +39,36 @@ export default function AboutBrigit() {
         .no-ligs {
           font-variant-ligatures: none;
           -webkit-font-variant-ligatures: none;
-          font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
+          font-feature-settings: 'liga' 0, 'clig' 0, 'dlig' 0, 'hlig' 0;
         }
       `}</style>
 
-      {/* Background border overlay */}
-      <img
-        src="/fullpageborder1.png"
-        alt="Elegant gold border"
+      {/* Full-page gold border overlay */}
+      <div
         style={{
-          position: 'absolute',
-          top: '0',
-          left: '0',
+          position: 'fixed',
+          top: 0,
+          left: 0,
           width: '100%',
           height: '100%',
-          objectFit: 'cover',
-          opacity: 0.65,
-          pointerEvents: 'none',
           zIndex: 1,
+          pointerEvents: 'none',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
-      />
+      >
+        <img
+          src="/fullpageborder1.png"
+          alt="Elegant gold border"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: 0.8,
+          }}
+        />
+      </div>
 
       {/* Back button */}
       <button
@@ -65,8 +82,8 @@ export default function AboutBrigit() {
           left: '1rem',
           zIndex: 50,
           color: '#fff',
-          background: 'rgba(11,12,16,0.55)',
-          border: '1px solid rgba(255,255,255,.18)',
+          background: 'rgba(11, 12, 16, 0.55)',
+          border: '1px solid rgba(255, 255, 255, 0.18)',
           backdropFilter: 'blur(6px)',
           cursor: 'pointer',
           lineHeight: 1,
@@ -99,7 +116,7 @@ export default function AboutBrigit() {
           position: 'relative',
           zIndex: 2,
           display: 'flex',
-          flexDirection: 'row',
+          flexDirection: 'row-reverse', // move Brigit’s image to the right
           alignItems: 'center',
           justifyContent: 'center',
           gap: '3rem',
@@ -109,7 +126,7 @@ export default function AboutBrigit() {
           flexWrap: 'wrap',
         }}
       >
-        {/* Brigit’s image & logos */}
+        {/* Brigit’s image + logos */}
         <div style={{ flex: '1 1 420px', maxWidth: 480, textAlign: 'center' }}>
           <img
             src="/brigitwork.PNG"
@@ -150,7 +167,7 @@ export default function AboutBrigit() {
             className="no-ligs"
             style={{
               fontSize: '1.15rem',
-              color: '#cfcfcf',
+              color: '#d4d4d4',
               marginBottom: '.5rem',
               letterSpacing: '.4px',
             }}
@@ -165,6 +182,7 @@ export default function AboutBrigit() {
               margin: '.25rem 0 1rem',
               fontWeight: 700,
               lineHeight: 1.28,
+              color: '#fff',
             }}
           >
             Brigit — Strategic, compassionate, and purpose driven
@@ -173,7 +191,7 @@ export default function AboutBrigit() {
           <div
             className="no-ligs"
             style={{
-              color: '#d1d5db',
+              color: '#e5e5e5',
               lineHeight: 1.8,
               fontSize: '1.05rem',
               textAlign: 'justify',
