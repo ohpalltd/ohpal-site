@@ -10,14 +10,14 @@ export default function AboutBrigit() {
       style={{
         position: 'relative',
         minHeight: '100vh',
-        backgroundColor: '#000', // pure black
+        backgroundColor: '#000',
         color: '#fff',
         fontFamily: 'TheSeasons, serif',
         padding: '3rem 1.5rem 4rem',
         overflow: 'hidden',
       }}
     >
-      {/* hide any global hero/header just in case */}
+      {/* Nuke any global hero/header just in case */}
       <style jsx global>{`
         header, .hero, .ohpal-hero, .ohpalHeader, .learnMore, video, [class*="hero"] {
           display: none !important;
@@ -25,16 +25,23 @@ export default function AboutBrigit() {
         html, body { background: #000 !important; }
       `}</style>
 
-      {/* turn off ligatures everywhere on this page */}
+      {/* turn off ligatures so the hyphen artifact never appears */}
       <style>{`
         .no-ligs {
           font-variant-ligatures: none;
           -webkit-font-variant-ligatures: none;
           font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
         }
+        /* Side borders: soften on tablets, hide on phones */
+        @media (max-width: 1024px) {
+          .side-border { opacity: .5; height: 44vh !important; }
+        }
+        @media (max-width: 680px) {
+          .side-border { display: none !important; }
+        }
       `}</style>
 
-      {/* 4-corner regal frame (no page tint) */}
+      {/* 4-corner regal frame (soft opacity) */}
       <img
         src="/regaltopleft.png"
         alt=""
@@ -47,6 +54,7 @@ export default function AboutBrigit() {
           maxWidth: '42%',
           pointerEvents: 'none',
           zIndex: 1,
+          opacity: 0.75,
         }}
       />
       <img
@@ -61,6 +69,7 @@ export default function AboutBrigit() {
           maxWidth: '42%',
           pointerEvents: 'none',
           zIndex: 1,
+          opacity: 0.75,
         }}
       />
       <img
@@ -75,6 +84,7 @@ export default function AboutBrigit() {
           maxWidth: '42%',
           pointerEvents: 'none',
           zIndex: 1,
+          opacity: 0.75,
         }}
       />
       <img
@@ -89,10 +99,47 @@ export default function AboutBrigit() {
           maxWidth: '42%',
           pointerEvents: 'none',
           zIndex: 1,
+          opacity: 0.75,
         }}
       />
 
-      {/* back button to the Who we are section on home */}
+      {/* NEW: side borders — centered vertically, between the corners */}
+      <img
+        src="/dialeftsideborder.png"
+        alt=""
+        aria-hidden="true"
+        className="side-border"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: 0,
+          transform: 'translateY(-50%)',
+          height: '60vh',
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 0.7,
+          filter: 'drop-shadow(0 0 6px rgba(255, 204, 102, .12))',
+        }}
+      />
+      <img
+        src="/diarightsideborder.png"
+        alt=""
+        aria-hidden="true"
+        className="side-border"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          right: 0,
+          transform: 'translateY(-50%)',
+          height: '60vh',
+          pointerEvents: 'none',
+          zIndex: 1,
+          opacity: 0.7,
+          filter: 'drop-shadow(0 0 6px rgba(255, 204, 102, .12))',
+        }}
+      />
+
+      {/* Back button to the Who we are section */}
       <button
         onClick={() => router.push('/#who-we-are')}
         aria-label="Back to Who We Are"
@@ -122,7 +169,13 @@ export default function AboutBrigit() {
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path
+            d="M15 18l-6-6 6-6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
 
@@ -130,7 +183,7 @@ export default function AboutBrigit() {
       <section
         style={{
           position: 'relative',
-          zIndex: 2, // above corner frames
+          zIndex: 2, // above decorative frames
           display: 'flex',
           flexDirection: 'row-reverse', // image right, text left
           alignItems: 'center',
@@ -173,19 +226,33 @@ export default function AboutBrigit() {
         <div style={{ flex: '1 1 600px', maxWidth: 640, textAlign: 'left' }}>
           <h2
             className="no-ligs"
-            style={{ fontSize: '1.15rem', color: '#d4d4d4', marginBottom: '.5rem', letterSpacing: '.4px' }}
+            style={{
+              fontSize: '1.15rem',
+              color: '#d4d4d4',
+              marginBottom: '.5rem',
+              letterSpacing: '.4px',
+            }}
           >
             Meet our Aus Director — Brigit Husseini
           </h2>
 
           <h1
             className="no-ligs"
-            style={{ fontSize: '2rem', margin: '.25rem 0 1rem', fontWeight: 700, lineHeight: 1.28, color: '#fff' }}
+            style={{
+              fontSize: '2rem',
+              margin: '.25rem 0 1rem',
+              fontWeight: 700,
+              lineHeight: 1.28,
+              color: '#fff',
+            }}
           >
             Brigit — Strategic, compassionate, and purpose driven
           </h1>
 
-          <div className="no-ligs" style={{ color: '#e5e5e5', lineHeight: 1.8, fontSize: '1.05rem', textAlign: 'justify' }}>
+          <div
+            className="no-ligs"
+            style={{ color: '#e5e5e5', lineHeight: 1.8, fontSize: '1.05rem', textAlign: 'justify' }}
+          >
             <p>
               Salam, I am Brigit, a proud Lebanese Australian who has had the privilege of growing up in Lebanon and
               building a life in Australia. My upbringing instilled in me the importance of resilience, community, and
@@ -215,3 +282,4 @@ export default function AboutBrigit() {
     </main>
   )
 }
+
