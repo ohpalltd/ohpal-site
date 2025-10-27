@@ -17,7 +17,7 @@ export default function AboutLiz() {
         overflow: 'hidden',
       }}
     >
-      {/* Hide all Ohpal hero/banner elements */}
+      {/* Hide Ohpal banner and hero elements */}
       <style jsx global>{`
         header, .hero, .ohpal-hero, .ohpalHeader, .learnMore, video, [class*="hero"] {
           display: none !important;
@@ -27,7 +27,7 @@ export default function AboutLiz() {
         }
       `}</style>
 
-      {/* Disable ligatures */}
+      {/* Turn off ligatures */}
       <style>{`
         .no-ligs {
           font-variant-ligatures: none;
@@ -36,7 +36,7 @@ export default function AboutLiz() {
         }
       `}</style>
 
-      {/* Side decorative borders */}
+      {/* Side borders */}
       <img
         src="/dialeftsideborder.png"
         alt=""
@@ -47,7 +47,7 @@ export default function AboutLiz() {
           bottom: 0,
           left: 0,
           height: '100%',
-          opacity: 0.35,
+          opacity: 0.3,
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -62,7 +62,7 @@ export default function AboutLiz() {
           bottom: 0,
           right: 0,
           height: '100%',
-          opacity: 0.35,
+          opacity: 0.3,
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -108,8 +108,8 @@ export default function AboutLiz() {
           position: 'relative',
           zIndex: 2,
           display: 'flex',
-          flexDirection: 'row-reverse', // image on right
-          alignItems: 'center',
+          flexDirection: 'row-reverse',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           gap: '3rem',
           maxWidth: '1200px',
@@ -119,7 +119,14 @@ export default function AboutLiz() {
         }}
       >
         {/* Image + logos */}
-        <div style={{ flex: '1 1 420px', maxWidth: 480, textAlign: 'center' }}>
+        <div
+          style={{
+            flex: '1 1 420px',
+            maxWidth: 480,
+            textAlign: 'center',
+            alignSelf: 'flex-start',
+          }}
+        >
           <img
             src="/lizport2.PNG"
             alt="Elizabeth Faleafa"
@@ -129,6 +136,7 @@ export default function AboutLiz() {
               borderRadius: '14px',
               boxShadow: '0 10px 30px rgba(0,0,0,.6)',
               objectFit: 'cover',
+              marginTop: '0.5rem',
             }}
           />
           <div
@@ -140,8 +148,8 @@ export default function AboutLiz() {
               marginTop: '1.25rem',
             }}
           >
-            <img src="/Peridotrepid.png" alt="Peridotrepid" style={{ width: 90, opacity: 0.95 }} />
-            <img src="/Citrinoor.png" alt="Citrinoor" style={{ width: 90, opacity: 0.95 }} />
+            <img src="/Peridotrepid.png" alt="Peridotrepid" style={{ width: 90, opacity: 0.9 }} />
+            <img src="/Citrinoor.png" alt="Citrinoor" style={{ width: 90, opacity: 0.9 }} />
           </div>
         </div>
 
@@ -169,7 +177,7 @@ export default function AboutLiz() {
               color: '#fff',
             }}
           >
-            Liz, the tactician, the visionary.
+            Liz, the tactician, the visionary
           </h1>
 
           <div
@@ -182,16 +190,16 @@ export default function AboutLiz() {
             }}
           >
             <p>
-              Malo e lelei, I am a proud Tongan from Aotearoa New Zealand, and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
+              Malo e lelei, I'm Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
             </p>
             <p>
-              My background is in logistics, procurement, and marketing operations. Before my pursuit for my own endeavours, I turned complex systems into practical solutions. Solutions, I plan on evolving and implementing from my vast expeirence to serve communities from across the borders.
+              My background is in logistics, procurement, and marketing operations. Before pursuing my own endeavours, I turned complex systems into practical solutions—solutions I now evolve and implement from my experience to serve communities across borders.
             </p>
             <p>
               At Ohpal I lead with a tactical mindset focused on execution, compliance, and sustainable growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project is built with structure, compassion, integrity, and a long term vision.
             </p>
             <p>
-              As a mother of three and a purveyor of good trouble, I build for people first, whilst rooted in enviromental sustainability, human and animal rights. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
+              As a mother of three and a purveyor of good trouble, I build for people first, rooted in environmental sustainability, human and animal rights. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
             </p>
           </div>
         </div>
@@ -199,4 +207,3 @@ export default function AboutLiz() {
     </main>
   )
 }
-
