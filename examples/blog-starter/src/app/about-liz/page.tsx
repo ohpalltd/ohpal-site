@@ -182,7 +182,7 @@ export default function AboutLiz() {
             }}
           >
             <p>
-              Malo e lelei, I'm Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
+              Malo e lelei, I am a proud Tongan from Aotearoa New Zealand, and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
             </p>
             <p>
               My background is in logistics, procurement, and marketing operations. Before my pursuit for my own endeavours, I turned complex systems into practical solutions. Solutions, I plan on evolving and implementing from my vast expeirence to serve communities from across the borders.
