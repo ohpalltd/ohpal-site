@@ -2,243 +2,204 @@
 
 import { useRouter } from 'next/navigation'
 
-export default function HomePage() {
+export default function AboutLiz() {
   const router = useRouter()
-
-  const handleSapphiraCareClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    document.body.style.opacity = '0'
-    document.body.style.transition = 'opacity 0.5s ease'
-    setTimeout(() => router.push('/sapphiracare'), 250)
-    setTimeout(() => {
-      document.body.style.opacity = '1'
-      document.body.style.transition = ''
-    }, 1000)
-  }
 
   return (
     <main
       style={{
+        position: 'relative',
         minHeight: '100vh',
         backgroundColor: '#000',
-        color: 'white',
-        textAlign: 'center',
-        padding: '3rem 1rem',
+        color: '#fff',
         fontFamily: 'TheSeasons, serif',
+        padding: '3rem 1.5rem 4rem',
+        overflow: 'hidden',
       }}
     >
-      {/* ===== HERO (leave as-is visually; simple title/tagline kept to match your current look) ===== */}
-      <h1
-        style={{
-          fontSize: '2.5rem',
-          marginBottom: '0.75rem',
-          fontWeight: 700,
-        }}
-      >
-        Ohpal International Ltd
-      </h1>
-      <p
-        style={{
-          color: '#ccc',
-          marginBottom: '2.5rem',
-          fontSize: '1.1rem',
-          maxWidth: '720px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          lineHeight: 1.6,
-        }}
-      >
-        A seamless collaboration in Trade, Care, and Culture.
-      </p>
+      {/* Hide any global hero/header just in case */}
+      <style jsx global>{`
+        header, .hero, .ohpal-hero, .ohpalHeader, .learnMore, video, [class*="hero"] {
+          display: none !important;
+        }
+        html, body { background: #000 !important; }
+      `}</style>
 
-      {/* ===== BRANCH GRID (kept as-is, just neatly centered) ===== */}
-      <div
+      {/* Turn off ligatures */}
+      <style>{`
+        .no-ligs {
+          font-variant-ligatures: none;
+          -webkit-font-variant-ligatures: none;
+          font-feature-settings: "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
+        }
+      `}</style>
+
+      {/* Side borders only */}
+      <img
+        src="/dialeftsideborder.png"
+        alt=""
+        aria-hidden="true"
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          gap: '2.5rem',
-          maxWidth: '960px',
-          margin: '0 auto 3rem',
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          width: 'min(8vw, 120px)',
+          opacity: 0.4,
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
+      <img
+        src="/diarightsideborder.png"
+        alt=""
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          top: 0,
+          bottom: 0,
+          right: 0,
+          width: 'min(8vw, 120px)',
+          opacity: 0.4,
+          pointerEvents: 'none',
+          zIndex: 1,
+        }}
+      />
+
+      {/* Back button to “Who we are” */}
+      <button
+        onClick={() => router.push('/#who-we-are')}
+        aria-label="Back to Who We Are"
+        title="Back to Who We Are"
+        type="button"
+        style={{
+          position: 'fixed',
+          top: '1rem',
+          left: '1rem',
+          zIndex: 50,
+          color: '#fff',
+          background: 'rgba(11,12,16,0.55)',
+          border: '1px solid rgba(255,255,255,.18)',
+          backdropFilter: 'blur(6px)',
+          cursor: 'pointer',
+          lineHeight: 1,
+          padding: '.5rem',
+          borderRadius: '.7rem',
+          transition: '0.25s ease',
         }}
       >
-        {[
-          {
-            img: '/Peridotrepid.png',
-            title: 'Peridotrepid',
-            desc: 'Logistics and procurement',
-          },
-          {
-            img: '/Carneliana.png',
-            title: 'Carneliana',
-            desc: 'Wellness and medical travel',
-          },
-          {
-            img: '/SapphiraCare.png',
-            title: 'SapphiraCare',
-            desc: 'Care and support services',
-            link: '/sapphiracare',
-          },
-          {
-            img: '/Citrinoor.png',
-            title: 'Citrinoor',
-            desc: 'Community and philanthropy',
-          },
-        ].map((item, i) => (
-          <div
-            key={i}
-            onClick={
-              item.link
-                ? (e) => {
-                    if (item.link === '/sapphiracare')
-                      handleSapphiraCareClick(e as any)
-                  }
-                : undefined
-            }
-            style={{
-              width: 200,
-              cursor: item.link ? 'pointer' : 'default',
-              transition: 'transform 0.35s ease, box-shadow 0.35s ease',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1.05)'
-              ;(e.currentTarget as HTMLElement).style.boxShadow =
-                '0 10px 25px rgba(255,255,255,0.15)'
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.transform = 'scale(1)'
-              ;(e.currentTarget as HTMLElement).style.boxShadow = 'none'
-            }}
-          >
-            <img
-              src={item.img}
-              alt={item.title}
-              style={{
-                width: '100%',
-                borderRadius: 12,
-                marginBottom: '0.75rem',
-                display: 'block',
-              }}
-            />
-            <p style={{ fontWeight: 700, fontSize: '1.05rem' }}>{item.title}</p>
-            <p style={{ color: '#bbb', fontSize: '0.9rem', lineHeight: 1.4 }}>
-              {item.desc}
-            </p>
-          </div>
-        ))}
-      </div>
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </button>
 
-      {/* ===== ABOUT SECTION ===== */}
+      {/* CONTENT */}
       <section
         style={{
-          backgroundColor: '#000',
-          padding: '3rem 1rem 4rem',
+          position: 'relative',
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'row-reverse',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '3rem',
+          maxWidth: '1200px',
+          width: '100%',
+          margin: '5rem auto 0',
+          flexWrap: 'wrap',
         }}
       >
-        <h2
-          style={{
-            fontSize: '1.9rem',
-            fontWeight: 700,
-            marginBottom: '1rem',
-          }}
-        >
-          Who we are
-        </h2>
+        {/* Right column: Liz’s image + logos */}
+        <div style={{ flex: '1 1 420px', maxWidth: 480, textAlign: 'center' }}>
+          <img
+            src="/lizlaptop.png"
+            alt="Elizabeth Faleafa"
+            style={{
+              width: '100%',
+              maxWidth: '360px',
+              borderRadius: '14px',
+              boxShadow: '0 10px 30px rgba(0,0,0,.6)',
+              objectFit: 'cover',
+            }}
+          />
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '1.5rem',
+              marginTop: '1.25rem',
+            }}
+          >
+            <img src="/Peridotrepid.png" alt="Peridotrepid" style={{ width: 90, opacity: 0.95 }} />
+            <img src="/Citrinoor.png" alt="Citrinoor" style={{ width: 90, opacity: 0.95 }} />
+          </div>
+        </div>
 
-        <p
-          style={{
-            color: '#ccc',
-            maxWidth: '920px',
-            margin: '0 auto 2.5rem',
-            lineHeight: 1.75,
-            fontSize: '1.05rem',
-            textAlign: 'center',
-          }}
-        >
-          We’re a collective grounded in real-life experience, deep care, and a shared vision for something better.
-          Ohpal was born to bridge worlds — connecting wellness, care, logistics, and community in ways that feel human,
-          holistic, and healing. Each branch of Ohpal is a reflection of who we are: resilient, intentional, and
-          unapologetically values-driven. We invite you to share in our vision.
-        </p>
+        {/* Left column: Heading + blurb */}
+        <div style={{ flex: '1 1 600px', maxWidth: 640, textAlign: 'left' }}>
+          <h2
+            className="no-ligs"
+            style={{
+              fontSize: '1.15rem',
+              color: '#d4d4d4',
+              marginBottom: '.5rem',
+              letterSpacing: '.4px',
+            }}
+          >
+            Meet our NZ Director — Liz Faleafa
+          </h2>
 
-        {/* Intro Cards: Brigit / Liz / Together */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '2rem',
-          }}
-        >
-          {[
-            {
-              img: '/brigitcare.png',
-              title: 'Brigit — Grounded in care',
-              to: '/about-brigit',
-              desc:
-                'Brigit leads with compassion and clarity. Her focus is on safe, dignified access to support — listening first, then guiding people through at their pace.',
-            },
-            {
-              img: '/lizlaptop.png',
-              title: 'Liz — Practical and people-first',
-              to: '/about-liz',
-              desc:
-                'Liz brings structure to vision: clear communication, real-world operations, and a commitment to moving with integrity in every partnership.',
-            },
-            {
-              img: '/lizbrigitworkv2.png', // Together card image
-              title: 'Together — Trade, care, and culture',
-              to: '/about',
-              desc:
-                'From ports and supply lines to care networks and community projects, we connect what matters and make it work smoothly for the people it serves.',
-            },
-          ].map((card, i) => (
-            <a
-              key={i}
-              href={card.to}
-              style={{
-                textDecoration: 'none',
-                color: 'inherit',
-                width: 300,
-                backgroundColor: '#111',
-                borderRadius: 14,
-                padding: '1rem',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                boxShadow: '0 8px 20px rgba(0,0,0,0.4)',
-                transition: 'transform 0.35s ease, box-shadow 0.35s ease',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = 'scale(1.03)'
-                ;(e.currentTarget as HTMLElement).style.boxShadow =
-                  '0 10px 25px rgba(255,255,255,0.15)'
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform = 'scale(1)'
-                ;(e.currentTarget as HTMLElement).style.boxShadow =
-                  '0 8px 20px rgba(0,0,0,0.4)'
-              }}
-            >
-              <img
-                src={card.img}
-                alt={card.title}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  borderRadius: 12,
-                  marginBottom: '1rem',
-                  objectFit: 'cover',
-                }}
-              />
-              <h3 style={{ fontWeight: 700, marginBottom: '.5rem', textAlign: 'center' }}>
-                {card.title}
-              </h3>
-              <p style={{ color: '#ccc', lineHeight: 1.6, textAlign: 'center' }}>
-                {card.desc}
-              </p>
-            </a>
-          ))}
+          <h1
+            className="no-ligs"
+            style={{
+              fontSize: '2rem',
+              margin: '.25rem 0 1rem',
+              fontWeight: 700,
+              lineHeight: 1.28,
+              color: '#fff',
+            }}
+          >
+            Liz — Tactical, visionary, and purpose driven
+          </h1>
+
+          <div
+            className="no-ligs"
+            style={{
+              color: '#e5e5e5',
+              lineHeight: 1.8,
+              fontSize: '1.05rem',
+              textAlign: 'justify',
+            }}
+          >
+            <p>
+              Mālō e lelei, I’m Liz — a proud Tongan-New Zealander and co-founder of Ohpal International Ltd.
+              My upbringing as a child of immigrants instilled in me the values of hard work, humility, and 
+              community — lessons that continue to guide my work and leadership today.
+            </p>
+            <p>
+              With a background in logistics, procurement, and marketing operations, I’ve built my career 
+              around connecting people, processes, and purpose. I’m passionate about transforming complex 
+              systems into practical, human-centred solutions that create impact across borders.
+            </p>
+            <p>
+              At Ohpal, I lead with a tactical mindset — focusing on execution, compliance, and sustainable 
+              growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project 
+              reflects a balance of structure and compassion, grounded in integrity and long-term vision.
+            </p>
+            <p>
+              As a mother and entrepreneur, I believe in building systems that work not just for profit, 
+              but for people. My mission is to bridge cultures, empower communities, and ensure that 
+              everything we build contributes to something lasting and meaningful.
+            </p>
+          </div>
         </div>
       </section>
     </main>
