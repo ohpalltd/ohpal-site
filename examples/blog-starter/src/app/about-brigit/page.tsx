@@ -111,7 +111,7 @@ export default function AboutBrigit() {
             className="no-ligs"
             style={{ fontSize: '2rem', margin: '.25rem 0 1rem', fontWeight: 700, lineHeight: 1.28 }}
           >
-            Brigit — Strategic, compassionate, and purpose-driven
+            Brigit — Strategic, compassionate, and purpose driven
           </h1>
 
           {/* Logos under her image (requested placement) */}
