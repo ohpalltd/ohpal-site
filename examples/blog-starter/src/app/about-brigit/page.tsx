@@ -104,7 +104,7 @@ export default function AboutBrigit() {
             className="no-ligs"
             style={{ fontSize: '1.15rem', color: '#cfcfcf', marginBottom: '.5rem', letterSpacing: '.4px' }}
           >
-            Meet our strategist — Brigitta Husseini
+            Meet our Aus Director — Brigitta Husseini
           </h2>
 
           <h1
