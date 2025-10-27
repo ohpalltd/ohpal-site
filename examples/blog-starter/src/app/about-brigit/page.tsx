@@ -32,64 +32,6 @@ export default function AboutBrigit() {
         }
       `}</style>
 
-      {/* Four corner frames */}
-      <img
-        src="/regaltopleft.png"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: 'min(18vw, 280px)',
-          opacity: 0.55,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      <img
-        src="/regaltopright.png"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          top: 0,
-          right: 0,
-          width: 'min(18vw, 280px)',
-          opacity: 0.55,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      <img
-        src="/regalbottomleft.png"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          width: 'min(18vw, 280px)',
-          opacity: 0.55,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-      <img
-        src="/regalbottomright.png"
-        alt=""
-        aria-hidden="true"
-        style={{
-          position: 'fixed',
-          bottom: 0,
-          right: 0,
-          width: 'min(18vw, 280px)',
-          opacity: 0.55,
-          pointerEvents: 'none',
-          zIndex: 1,
-        }}
-      />
-
       {/* Side borders */}
       <img
         src="/dialeftsideborder.png"
