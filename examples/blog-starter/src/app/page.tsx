@@ -180,10 +180,10 @@ export default function HomePage() {
             },
             {
               img: '/lizlaptop.png',
-              title: 'Liz — Practical and people-first',
+              title: 'Liz — Practical and process focused',
               to: '/about-liz',
               desc:
-                'Liz brings structure to vision: clear communication, real-world operations, and a commitment to moving with integrity in every partnership.',
+                'Liz brings structure to vision: clear communication, real world operations, and a commitment to moving with integrity in every partnership.',
             },
             {
               img: '/lizbrigitworkv2.png', // Together card image
