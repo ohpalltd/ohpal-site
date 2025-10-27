@@ -191,7 +191,7 @@ export default function AboutLiz() {
               At Ohpal I lead with a tactical mindset focused on execution, compliance, and sustainable growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project is built with structure, compassion, integrity, and a long term vision.
             </p>
             <p>
-              As a mother and an entrepreneur, I build for people first, not only for profit. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
+              As a mother and an entrepreneur, I build for people first, whilst maintaining my values in sustainable solutions. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
             </p>
           </div>
         </div>
