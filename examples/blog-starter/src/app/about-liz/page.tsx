@@ -156,7 +156,7 @@ export default function AboutLiz() {
               letterSpacing: '.4px',
             }}
           >
-            Meet our NZ Director, Liz Faleafa
+            Meet our NZ Director, Elizabeth Faleafa
           </h2>
 
           <h1
@@ -169,7 +169,7 @@ export default function AboutLiz() {
               color: '#fff',
             }}
           >
-            Liz, tactical, visionary, and purpose driven
+            Liz, the tactician, the visionary.
           </h1>
 
           <div
@@ -182,16 +182,16 @@ export default function AboutLiz() {
             }}
           >
             <p>
-              Malo e lelei, I am Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
+              Malo e lelei, I'm Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
             </p>
             <p>
-              My background is in logistics, procurement, and marketing operations. I connect people, processes, and purpose. I turn complex systems into practical solutions that serve real communities across borders.
+              My background is in logistics, procurement, and marketing operations. Before my pursuit for my own endeavours, I turned complex systems into practical solutions. Solutions, I plan on evolving and implementing from my vast expeirence to serve communities from across the borders.
             </p>
             <p>
               At Ohpal I lead with a tactical mindset focused on execution, compliance, and sustainable growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project is built with structure, compassion, integrity, and a long term vision.
             </p>
             <p>
-              As a mother and an entrepreneur, I build for people first, whilst maintaining my values in sustainable solutions. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
+              As a mother of three and a purveyor of good trouble, I build for people first, whilst rooted in enviromental sustainability, human and animal rights. My mission is to bridge cultures, empower communities, and create work that lasts and makes a difference.
             </p>
           </div>
         </div>
