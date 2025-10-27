@@ -15,25 +15,25 @@ export default function AboutBrigit() {
         padding: '2rem 1.25rem 4rem',
       }}
     >
-      {/* Hide the Ohpal home hero ONLY on this page */}
+      {/* Hide Ohpal hero/video only on this route */}
       <style jsx global>{`
-        /* Common classnames/containers we used on the home hero */
         .hero,
         .home-hero,
         .ohpal-hero,
-        .heroVideo,
-        .heroInner,
-        .hero__wrap,
-        header.hero,
+        .ohpalHeader,
+        .ohpal-cta,
         .learnMore,
-        .ohpalHeader {
+        .heroInner,
+        .heroVideo,
+        [class*="hero"],
+        [class*="Hero"],
+        video {
           display: none !important;
         }
-        /* make sure the page background is solid */
         html, body { background: #0a0a0a !important; }
       `}</style>
 
-      {/* Local styles to remove ligature artifacts (weird symbol) */}
+      {/* Disable ligatures to remove symbol */}
       <style>{`
         .no-ligs {
           font-variant-ligatures: none;
@@ -68,7 +68,7 @@ export default function AboutBrigit() {
         </svg>
       </button>
 
-      {/* Split layout */}
+      {/* Split layout (text left, image right) */}
       <section
         style={{
           display: 'flex',
@@ -82,29 +82,13 @@ export default function AboutBrigit() {
           marginTop: '3rem',
         }}
       >
-        {/* Left: smaller hero image */}
-        <div style={{ flex: '1 1 320px', display: 'flex', justifyContent: 'center' }}>
-          <img
-            src="/brigitwork.PNG"
-            alt="Brigitta Husseini"
-            style={{
-              width: '100%',
-              maxWidth: '260px',   // << smaller
-              height: 'auto',
-              borderRadius: 14,
-              boxShadow: '0 10px 30px rgba(0,0,0,.5)',
-              objectFit: 'cover',
-            }}
-          />
-        </div>
-
-        {/* Right: Content */}
+        {/* LEFT: content */}
         <div style={{ flex: '1 1 560px', maxWidth: 640, textAlign: 'left' }}>
           <h2
             className="no-ligs"
             style={{ fontSize: '1.15rem', color: '#cfcfcf', marginBottom: '.5rem', letterSpacing: '.4px' }}
           >
-            Meet our Aus Director — Brigitta Husseini
+            Meet our strategist — Brigitta Husseini
           </h2>
 
           <h1
@@ -114,39 +98,17 @@ export default function AboutBrigit() {
             Brigit — Strategic, compassionate, and purpose driven
           </h1>
 
-          {/* Logos under her image (requested placement) */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1.5rem',
-              margin: '0 0 1.25rem',
-              flexWrap: 'wrap',
-            }}
-          >
-            <img
-              src="/Carneliana.png"
-              alt="Carneliana"
-              style={{ width: 96, height: 'auto', opacity: 0.92 }}
-            />
-            <img
-              src="/SapphiraCare.png"
-              alt="SapphiraCare"
-              style={{ width: 96, height: 'auto', opacity: 0.92 }}
-            />
-          </div>
-
-          {/* Blurb (ligatures disabled) */}
           <div
             className="no-ligs"
             style={{ color: '#d1d5db', lineHeight: 1.8, fontSize: '1.05rem' }}
           >
             <p>
-              Salam, I’m Brigit, a proud Lebanese-Australian who has had the privilege of
+              Salam, I am Brigit, a proud Lebanese Australian who has had the privilege of
               growing up in Lebanon and building a life in Australia. My upbringing instilled
               in me the importance of resilience, community, and living by my values — principles
               that continue to guide me today.
             </p>
+
             <p>
               As a dynamic corporate leader, I bring extensive experience spanning strategic sales
               management in the telecommunications industry and serving as General Manager for a
@@ -154,13 +116,15 @@ export default function AboutBrigit() {
               record of driving business growth, building strong client relationships, and leading
               teams to exceed performance goals.
             </p>
+
             <p>
-              Over time, I realized that true fulfillment comes from aligning my work with my values.
-              This inspired me to co-found Ohpal International Ltd., a company dedicated to fostering
+              Over time, I realised that true fulfilment comes from aligning my work with my values.
+              This inspired me to cofounded Ohpal International Ltd, a company dedicated to fostering
               global connections and promoting sustainable development through innovative partnerships.
               With SapphiraCare and Carneliana under my leadership, I channel my expertise into making a
               meaningful difference, blending purpose with action.
             </p>
+
             <p>
               As a mother, I find immense joy and purpose in nurturing my family, and as a professional,
               I am deeply committed to creating opportunities, uplifting others, and building a legacy of
@@ -168,6 +132,47 @@ export default function AboutBrigit() {
               trust and collaboration in diverse markets.
             </p>
           </div>
+
+          {/* Logos under the text */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              gap: '1.25rem',
+              marginTop: '1.75rem',
+              flexWrap: 'wrap',
+            }}
+          >
+            <img
+              src="/Carneliana.png"
+              alt="Carneliana"
+              style={{ width: 96, height: 'auto', opacity: 0.95 }}
+            />
+            <img
+              src="/SapphiraCare.png"
+              alt="SapphiraCare"
+              style={{ width: 96, height: 'auto', opacity: 0.95 }}
+            />
+          </div>
+        </div>
+
+        {/* RIGHT: image */}
+        <div style={{ flex: '1 1 320px', maxWidth: 360, textAlign: 'center' }}>
+          <img
+            src="/brigitwork.PNG"
+            alt="Brigitta Husseini"
+            style={{
+              width: '100%',
+              maxWidth: 260,
+              height: 'auto',
+              borderRadius: 14,
+              boxShadow: '0 10px 30px rgba(0,0,0,.5)',
+              objectFit: 'cover',
+              display: 'block',
+              margin: '0 auto',
+            }}
+          />
         </div>
       </section>
     </main>
