@@ -27,7 +27,7 @@ export default function HomePage() {
         fontFamily: 'TheSeasons, serif',
       }}
     >
-      {/* ===== HERO (leave as-is visually; simple title/tagline kept to match your current look) ===== */}
+      {/* ===== HERO ===== */}
       <h1
         style={{
           fontSize: '2.5rem',
@@ -40,7 +40,7 @@ export default function HomePage() {
       <p
         style={{
           color: '#ccc',
-          marginBottom: '2.5rem',
+          marginBottom: '1.5rem',
           fontSize: '1.1rem',
           maxWidth: '720px',
           marginLeft: 'auto',
@@ -51,7 +51,87 @@ export default function HomePage() {
         A seamless collaboration in Trade, Care, and Culture.
       </p>
 
-      {/* ===== BRANCH GRID (kept as-is, just neatly centered) ===== */}
+      {/* ===== OUR SECTS + SECTION BUTTONS ===== */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '.8rem',
+          marginBottom: '2.5rem',
+        }}
+      >
+        {/* Our Sects main button */}
+        <a
+          href="/about#story"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.6rem',
+            padding: '0.75rem 1.25rem',
+            border: '1px solid rgba(255,255,255,.25)',
+            borderRadius: '999px',
+            color: '#fff',
+            textDecoration: 'none',
+            fontWeight: 600,
+            transition:
+              'transform .2s ease, background .2s ease, border-color .2s ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'
+            ;(e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,.08)'
+            ;(e.currentTarget as HTMLElement).style.borderColor = '#fff'
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+            ;(e.currentTarget as HTMLElement).style.background = 'transparent'
+            ;(e.currentTarget as HTMLElement).style.borderColor =
+              'rgba(255,255,255,.25)'
+          }}
+        >
+          Our Sects
+        </a>
+
+        {/* Section links beside it */}
+        {[
+          { href: '/about#story', label: 'Our Story' },
+          { href: '/about#timeline', label: 'Timeline' },
+          { href: '/about#contact', label: 'Contact' },
+        ].map((chip) => (
+          <a
+            key={chip.href}
+            href={chip.href}
+            style={{
+              padding: '.6rem 1rem',
+              border: '1px solid rgba(255,255,255,.28)',
+              borderRadius: 999,
+              textDecoration: 'none',
+              color: '#fff',
+              fontWeight: 500,
+              transition:
+                'transform .18s ease, background .18s ease, border-color .18s ease',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'
+              ;(e.currentTarget as HTMLElement).style.backgroundColor =
+                'rgba(255,255,255,.08)'
+              ;(e.currentTarget as HTMLElement).style.borderColor = '#fff'
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
+              ;(e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
+              ;(e.currentTarget as HTMLElement).style.borderColor =
+                'rgba(255,255,255,.28)'
+            }}
+          >
+            {chip.label}
+          </a>
+        ))}
+      </div>
+
+      {/* ===== BRANCH GRID (unchanged) ===== */}
       <div
         style={{
           display: 'flex',
@@ -128,7 +208,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* ===== ABOUT SECTION ===== */}
+      {/* ===== WHO WE ARE (unchanged) ===== */}
       <section
         style={{
           backgroundColor: '#000',
@@ -161,7 +241,7 @@ export default function HomePage() {
           unapologetically values-driven. We invite you to share in our vision.
         </p>
 
-        {/* Intro Cards: Brigit / Liz / Together */}
+        {/* Intro Cards (unchanged) */}
         <div
           style={{
             display: 'flex',
@@ -186,7 +266,7 @@ export default function HomePage() {
                 'Liz brings structure to vision: clear communication, real world operations, and a commitment to moving with integrity in every partnership.',
             },
             {
-              img: '/lizbrigitworkv2.png', // Together card image
+              img: '/lizbrigitworkv2.png',
               title: 'Together — Trade, care, and culture',
               to: '/about',
               desc:
