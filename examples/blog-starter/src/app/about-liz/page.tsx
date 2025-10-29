@@ -190,10 +190,10 @@ export default function AboutLiz() {
             }}
           >
             <p>
-              Malo e lelei, I'm Liz, a proud Tongan New Zealander and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
+              Malo e lelei, Im Liz, a proud Tongan from Aotearoa and co founder of Ohpal International Ltd. My upbringing as a child of immigrants taught me hard work, humility, and the importance of community. These values guide my leadership and my decisions every day.
             </p>
             <p>
-              My background is in logistics, procurement, and marketing operations. Before pursuing my own endeavours, I turned complex systems into practical solutions—solutions I now evolve and implement from my experience to serve communities across borders.
+              My background is in logistics, procurement, and marketing operations. Before pursuing my endeavours with Ohpal International, I turned complex systems into practical solutions—solutions I now evolve and implement to serve communities across borders.
             </p>
             <p>
               At Ohpal I lead with a tactical mindset focused on execution, compliance, and sustainable growth under our trade and philanthropic branches, Peridotrepid and Citrinoor. Every project is built with structure, compassion, integrity, and a long term vision.
