@@ -76,21 +76,72 @@ export default function RootLayout({
               A seamless collaboration in Trade, Care and Culture.
             </p>
 
-            {/* CTA points to page content */}
-            <a
-              href="#about"
+            {/* CTA row: Our Sects + section buttons */}
+            <div
               style={{
-                display: 'inline-block',
-                padding: '0.6rem 1rem',
-                border: '1px solid rgba(255,255,255,0.6)',
-                borderRadius: 999,
-                color: '#fff',
-                textDecoration: 'none',
-                backdropFilter: 'blur(3px)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '.6rem',
               }}
             >
-              Learn more
-            </a>
+              {/* Our Sects (same behaviour as old Learn more: scrolls to #about) */}
+              <a
+                href="#about"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0.6rem 1rem',
+                  border: '1px solid rgba(255,255,255,0.6)',
+                  borderRadius: 999,
+                  color: '#000',
+                  background: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  transition: 'transform .2s ease, box-shadow .2s ease',
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                Our Sects
+              </a>
+
+              {/* Section links beside it */}
+              {[
+                { href: '/about#story', label: 'Our Story' },
+                { href: '/about#timeline', label: 'Timeline' },
+                { href: '/about#contact', label: 'Contact' },
+              ].map((chip) => (
+                <a
+                  key={chip.href}
+                  href={chip.href}
+                  style={{
+                    padding: '.5rem .9rem',
+                    border: '1px solid rgba(255,255,255,.28)',
+                    borderRadius: 999,
+                    textDecoration: 'none',
+                    color: '#fff',
+                    transition: 'transform .18s ease, background .18s ease, border-color .18s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                    (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,.08)';
+                    (e.currentTarget as HTMLElement).style.borderColor = '#fff';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                    (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.28)';
+                  }}
+                >
+                  {chip.label}
+                </a>
+              ))}
+            </div>
           </div>
         </header>
 
