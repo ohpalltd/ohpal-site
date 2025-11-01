@@ -16,6 +16,12 @@ export default function HomePage() {
     }, 1000)
   }
 
+  const smoothScrollToBranches = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const el = document.getElementById('branches')
+    el?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <main
       style={{
@@ -62,9 +68,10 @@ export default function HomePage() {
           marginBottom: '2.5rem',
         }}
       >
-        {/* Our Sects main button */}
+        {/* Our Sects main button (replaces Learn More) */}
         <a
-          href="/about#story"
+          href="#branches"
+          onClick={smoothScrollToBranches}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -131,8 +138,9 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* ===== BRANCH GRID (unchanged) ===== */}
+      {/* ===== BRANCH GRID (unchanged content but now has id="branches") ===== */}
       <div
+        id="branches"
         style={{
           display: 'flex',
           justifyContent: 'center',
