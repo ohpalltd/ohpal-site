@@ -1,66 +1,155 @@
-// examples/blog-starter/src/app/api/contact/route.ts
-import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+// examples/blog-starter/src/app/layout.tsx
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import './globals.css';
 
-export const runtime = 'nodejs'           // ensure Node runtime (nodemailer needs it)
-export const dynamic = 'force-dynamic'    // route runs dynamically
+export const metadata: Metadata = {
+  title: 'Ohpal International Ltd',
+  description: 'Seamless collaboration of Trade, Care and Culture.',
+};
 
-type Body = {
-  name?: string
-  phone?: string
-  email?: string
-  message?: string
-}
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body
+        style={{
+          margin: 0,
+          fontFamily: 'TheSeasons, serif',
+          color: '#fff',
+          backgroundColor: '#2b2b2b',
+        }}
+      >
+        {/* ===================== HERO ===================== */}
+        <header style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
+          <video
+            key="hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              minWidth: '100%',
+              minHeight: '100%',
+              transform: 'translate(-50%, -50%)',
+              objectFit: 'cover',
+              filter: 'brightness(0.6)',
+            }}
+            src="/Lush%20Palm%20Forrest.mp4"
+          />
 
-export async function POST(req: Request) {
-  try {
-    const body: Body = await req.json()
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+              padding: '0 1rem',
+            }}
+          >
+            <Image
+              src="/Ohpal2DTransparentHero.png"
+              alt="Ohpal 2D"
+              width={240}
+              height={240}
+              priority
+              sizes="(max-width: 480px) 140px, (max-width: 768px) 180px, 240px"
+              style={{ opacity: 0.95 }}
+            />
 
-    const name = (body.name || '').trim()
-    const phone = (body.phone || '').trim()
-    const email = (body.email || '').trim()
-    const message = (body.message || '').trim()
+            <h1 style={{ fontSize: '4rem', lineHeight: 1.1, margin: '0.75rem 0 0.25rem' }}>
+              OHPAL
+            </h1>
+            <h2 style={{ fontWeight: 400, margin: '0 0 0.75rem' }}>International Ltd</h2>
+            <p style={{ maxWidth: 780, margin: '0 0 1.25rem', fontSize: '1.05rem' }}>
+              A seamless collaboration in Trade, Care and Culture.
+            </p>
 
-    if (!name || !phone || !email || !message) {
-      return NextResponse.json({ ok: false, error: 'Missing fields' }, { status: 400 })
-    }
+            {/* CTA row: Our Sects + section chips */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '.6rem',
+              }}
+            >
+              {/* Our Sects (scrolls to #about) */}
+              <a
+                href="#about"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '0.6rem 1rem',
+                  border: '1px solid rgba(255,255,255,0.6)',
+                  borderRadius: 999,
+                  color: '#000',
+                  background: '#fff',
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  transition: 'transform .2s ease, box-shadow .2s ease',
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }}
+              >
+                Our Sects
+              </a>
 
-    // configure transporter using environment variables
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT || 587),
-      secure: !!(process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465'),
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
+              {/* Section links beside it */}
+              {[
+                { href: '/about#story', label: 'Our Story' },
+                { href: '/about#timeline', label: 'Timeline' },
+                { href: '/about#contact', label: 'Contact' },
+              ].map((chip) => (
+                <a
+                  key={chip.href}
+                  href={chip.href}
+                  style={{
+                    padding: '.5rem .9rem',
+                    border: '1px solid rgba(255,255,255,.28)',
+                    borderRadius: 999,
+                    textDecoration: 'none',
+                    color: '#fff',
+                    transition: 'transform .18s ease, background .18s ease, border-color .18s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                    (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,.08)';
+                    (e.currentTarget as HTMLElement).style.borderColor = '#fff';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                    (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.28)';
+                  }}
+                >
+                  {chip.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </header>
 
-    const html = `
-      <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#111">
-        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-        <p><strong>Contact number:</strong> ${escapeHtml(phone)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-        <p><strong>Message:</strong></p>
-        <pre style="white-space:pre-wrap;background:#f6f6f6;padding:12px;border-radius:8px">${escapeHtml(message)}</pre>
-      </div>
-    `
-
-    await transporter.sendMail({
-      from: `"Ohpal Website" <no-reply@ohpalltd.com>`,
-      to: 'admin@ohpalltd.com',
-      replyTo: email,
-      subject: `New contact form submission — ${name}`,
-      html,
-    })
-
-    return NextResponse.json({ ok: true })
-  } catch (e) {
-    console.error('[contact route] error:', e)
-    return NextResponse.json({ ok: false }, { status: 500 })
-  }
-}
-
-function escapeHtml(str: string) {
-  return str.replace(/[&<>"']/g, (s) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s] as string))
+        {/* ===================== MAIN CONTENT ===================== */}
+        <main id="about" style={{ background: '#f7f7f7', color: '#111' }}>
+          {children}
+        </main>
+      </body>
+    </html>
+  );
 }
