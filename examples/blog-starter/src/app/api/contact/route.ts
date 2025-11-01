@@ -1,4 +1,22 @@
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
+
+// === NEXT.JS BUILD CONFIGURATION ===
+// This line is essential for preventing timeout during static build:
+// It tells Next.js NOT to pre-render this route at build time.
+export const dynamic = 'force-dynamic'; 
+
+// 2. CONFIGURE the transporter using environment secrets (set these in Render)
+const transporter = nodemailer.createTransport({
+  // Use a common service like SendGrid, Resend, or your company's SMTP server
+  // It is generally safer to initialize the transporter outside the handler 
+  // but rely on environment variables being present when the app runs.
+  service: process.env.EMAIL_SERVICE || 'smtp', // e.g., 'gmail', 'Outlook', or a custom server name
+  auth: {
+    user: process.env.EMAIL_USER, // Your email account username/API Key
+    pass: process.env.EMAIL_PASS, // Your email password/Secret Key
+  },
+});
 
 /**
  * Handles POST requests to /api/contact
@@ -22,13 +40,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // --- INTEGRATION LOGIC GOES HERE ---
-    
-    // Simulate Email Sending (REPLACE WITH REAL EMAIL CLIENT LOGIC)
-    /*
-    // Example using a nodemailer/resend client (requires library installation and setup)
-    await emailClient.sendMail({
-      from: 'noreply@yourdomain.com', // Must be a verified sender
+    // 3. SEND EMAIL NOTIFICATION TO ADMIN
+    await transporter.sendMail({
+      from: process.env.EMAIL_FROM || 'noreply@ohpalltd.com', // Verified sender email
       to: ADMIN_EMAIL,
       subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -39,14 +53,10 @@ export async function POST(request: Request) {
         <div style="border: 1px solid #ccc; padding: 10px;">${message}</div>
       `,
     });
-    */
 
-    // 3. Log the lead to your CRM (e.g., call the Airtable API, as defined in api_spec.md)
-    // ------------------------------------
+    console.log(`Received contact submission and notified ${ADMIN_EMAIL}.`);
 
-    console.log(`Received contact submission and notified ${ADMIN_EMAIL}:`, { name, email, message });
-
-    // Assuming successful processing:
+    // 4. Return success message to the user's browser
     return NextResponse.json(
       { 
         message: 'Thank you for your message, our team will be in contact with you.', 
@@ -60,7 +70,7 @@ export async function POST(request: Request) {
     
     // Return a 500 Internal Server Error response
     return NextResponse.json(
-      { message: 'An internal server error occurred.' }, 
+      { message: 'An internal server error occurred while processing the request.' }, 
       { status: 500 }
     );
   }
