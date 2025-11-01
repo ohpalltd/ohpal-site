@@ -76,7 +76,7 @@ export default function RootLayout({
               A seamless collaboration in Trade, Care and Culture.
             </p>
 
-            {/* CTA row: Our Sects + section buttons */}
+            {/* CTA row: Our Sects + section chips */}
             <div
               style={{
                 display: 'flex',
@@ -86,7 +86,7 @@ export default function RootLayout({
                 gap: '.6rem',
               }}
             >
-              {/* Our Sects (same behaviour as old Learn more: scrolls to #about) */}
+              {/* Our Sects (scrolls to #about) */}
               <a
                 href="#about"
                 style={{
