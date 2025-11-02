@@ -11,7 +11,7 @@ export default function AboutPage() {
   const [message, setMessage] = useState('')
   const maxChars = 1000
 
-  // reveal
+  // reveal animations
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'))
     const io = new IntersectionObserver(
@@ -27,6 +27,19 @@ export default function AboutPage() {
     )
     els.forEach((el) => io.observe(el))
     return () => io.disconnect()
+  }, [])
+
+  // Scroll to hash if present (so /about#contact jumps to the form)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const h = window.location.hash
+    if (h) {
+      setTimeout(() => {
+        const id = h.replace('#', '')
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 60)
+    }
   }, [])
 
   async function submitContact(e: React.FormEvent<HTMLFormElement>) {
@@ -87,28 +100,42 @@ export default function AboutPage() {
         }
         .backArrow:hover { transform: translateX(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
 
-        /* Hero */
-        .hero { position: relative; z-index: 1; padding: 82px 1rem 18px; text-align: center; max-width: 1200px; margin: 0 auto; }
-        .heroGraphic { width: clamp(260px, 70vw, 1080px); height: auto; border-radius: 18px; box-shadow: 0 18px 60px rgba(0,0,0,.55); display: block; margin: 0 auto 1rem; }
-        .heroTitle { font-size: clamp(1.9rem, 4.5vw, 2.7rem); margin: .25rem 0 .5rem; }
-        .heroSub { color: #d1d5db; margin: 0 auto 1rem; max-width: 860px; line-height: 1.6; }
+        /* Hero removed for about page - no banner at top */
+        .hero { display: none !important; }
 
-        /* Story op-ed layout with wrapped images */
+        /* Story op-ed layout with side images */
         section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 1.25rem 1rem 2rem; }
         .sectionTitle { font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin: .25rem 0 .75rem; text-align: center; }
         .sectionLead  { color:#cfd5db; text-align:center; margin: 0 auto 1.1rem; max-width: 900px; line-height:1.7; }
 
-        .opEd { max-width: 900px; margin: 0 auto; line-height: 1.9; font-size: 1.05rem; color: #e5e7eb; }
-        .imgLeft, .imgRight {
-          width: 50%;
-          max-width: 480px;
+        .storyFlex {
+          display: flex;
+          align-items: flex-start;
+          justify-content: center;
+          gap: 2rem;
+          flex-wrap: wrap;
+          margin-top: 1rem;
+        }
+        .storyText {
+          flex: 1 1 480px;
+          line-height: 1.8;
+          font-size: 1.05rem;
+          color: #e5e7eb;
+        }
+        .storyImages {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 0 0 320px;
+          gap: 1.5rem;
+        }
+        .storyImages img {
+          width: 100%;
+          max-width: 320px;
           border-radius: 16px;
           box-shadow: 0 12px 40px rgba(0,0,0,.45);
+          object-fit: cover;
         }
-        .imgLeft { float: left; margin: .25rem 1rem .75rem 0; }
-        .imgRight { float: right; margin: .25rem 0 .75rem 1rem; }
-
-        .clearfix::after { content:""; display:block; clear:both; }
 
         /* Timeline */
         .timeline { position: relative; padding-left: 1.25rem; margin: 1rem auto 0; max-width: 760px; }
@@ -147,7 +174,9 @@ export default function AboutPage() {
         .reveal.in { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 860px) {
-          .imgLeft, .imgRight { float:none; width:100%; margin: 0 0 1rem 0; }
+          .storyFlex { flex-direction: column; }
+          .storyImages { flex-direction: row; gap: .75rem; justify-content: center; }
+          .storyImages img { max-width: 46%; }
           .row { grid-template-columns: 1fr; }
         }
       `}</style>
@@ -164,44 +193,35 @@ export default function AboutPage() {
         </svg>
       </button>
 
-      {/* Hero */}
-      <header className="hero">
-        <img
-          src="/lizbrigit.png"
-          alt="Liz and Brigit"
-          className="heroGraphic reveal"
-          loading="eager"
-        />
-        <h1 className="heroTitle reveal">About Ohpal</h1>
-        <p className="heroSub reveal">
-          We are a values first collective connecting trade, care and culture with steady hands and real world action.
-        </p>
-      </header>
-
-      {/* STORY */}
+      {/* STORY (no top banner/header) */}
       <section id="story" className="reveal">
         <h2 className="sectionTitle">Our story</h2>
         <p className="sectionLead">
           How two different paths met, aligned, and chose to build something useful for everyday people.
         </p>
 
-        <div className="opEd clearfix">
-          <img src="/lizbrigitport.png" alt="On the port" className="imgLeft" loading="lazy" />
-          <p>
-            Ohpal began as a conversation between two women who wanted better for their communities.
-            Brigit brought years of care and support experience that keeps dignity at the centre.
-            Liz brought logistics and operations that make plans real on the ground.
-          </p>
-          <p>
-            We compared notes. We saw the gaps. Then we chose to build a grassroots initiative that makes
-            services easier to access, trade more transparent, and communities more connected.
-            The idea was never to chase prestige. It was to make something that works and keeps people first.
-          </p>
-          <img src="/brigitcare.png" alt="Brigit in care setting" className="imgRight" loading="lazy" />
-          <p>
-            From there we shaped a simple model. Clear sign ups. Honest information. Practical routes from need to help.
-            We keep learning from the people we serve and from the partners who walk with us. That is how Ohpal grows.
-          </p>
+        <div className="storyFlex">
+          <div className="storyText">
+            <p>
+              Ohpal began as a conversation between two women who wanted better for their communities.
+              Brigit brought years of care and support experience that keeps dignity at the centre.
+              Liz brought logistics and operations that make plans real on the ground.
+            </p>
+            <p>
+              We compared notes. We saw the gaps. Then we chose to build a grassroots initiative that makes
+              services easier to access, trade more transparent, and communities more connected.
+              The idea was never to chase prestige. It was to make something that works and keeps people first.
+            </p>
+            <p>
+              From there we shaped a simple model. Clear sign ups. Honest information. Practical routes from need to help.
+              We keep learning from the people we serve and from the partners who walk with us. That is how Ohpal grows.
+            </p>
+          </div>
+
+          <div className="storyImages">
+            <img src="/lizbrigitport.png" alt="On the port" />
+            <img src="/brigitcare.png" alt="Brigit in care setting" />
+          </div>
         </div>
       </section>
 
@@ -283,4 +303,3 @@ export default function AboutPage() {
     </main>
   )
 }
-
