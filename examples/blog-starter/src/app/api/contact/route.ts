@@ -1,94 +1,80 @@
 // examples/blog-starter/src/app/api/contact/route.ts
-import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
+import { NextResponse } from 'next/server';
 
-export const runtime = 'nodejs'         // ensure Node runtime (required for nodemailer)
-export const dynamic = 'force-dynamic'  // don’t cache this route
+export const runtime = 'nodejs';     // ensure Node runtime on Render
+export const dynamic = 'force-dynamic';
 
 type Payload = {
-  name?: string
-  phone?: string
-  email?: string
-  message?: string
-}
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+};
 
-function required(v?: string) {
-  return typeof v === 'string' && v.trim().length > 0
+// We use a tiny inline call to Resend's REST API to avoid extra deps
+async function sendWithResend(to: string, subject: string, html: string) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) throw new Error('Missing RESEND_API_KEY');
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      // If your domain isn't verified yet, keep this sender for testing:
+      from: 'Ohpal <onboarding@resend.dev>',
+      to: [to],
+      subject,
+      html,
+    }),
+  });
+
+  if (!res.ok) {
+    const t = await res.text();
+    throw new Error(`Resend error: ${t}`);
+  }
 }
 
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as Payload
-    const name = body.name?.trim()
-    const phone = body.phone?.trim()
-    const email = body.email?.trim()
-    const message = body.message?.trim()
+    const data = (await req.json()) as Payload;
 
-    if (!required(name) || !required(email) || !required(message)) {
-      return NextResponse.json(
-        { ok: false, error: 'Missing required fields.' },
-        { status: 400 }
-      )
+    const name = (data.name || '').slice(0, 200);
+    const phone = (data.phone || '').slice(0, 80);
+    const email = (data.email || '').slice(0, 200);
+    const message = (data.message || '').slice(0, 2000);
+
+    if (!name || !phone || !email || !message) {
+      return NextResponse.json({ ok: false, error: 'Invalid payload' }, { status: 400 });
     }
 
-    // Transporter (Gmail via SMTP + app password)
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST,
-      port: Number(process.env.EMAIL_PORT || 465),
-      secure: Number(process.env.EMAIL_PORT || 465) === 465, // true for 465
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    })
-
-    const to = process.env.TO_EMAIL || process.env.EMAIL_USER
-    const subject = `Ohpal contact: ${name}`
-    const text = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${phone || '-'}`,
-      ``,
-      `Message:`,
-      `${message}`,
-    ].join('\n')
-
     const html = `
-      <div style="font-family:Arial, Helvetica, sans-serif;line-height:1.6;font-size:14px;color:#111">
-        <h2 style="margin:0 0 8px 0">New message from Ohpal website</h2>
-        <p><strong>Name:</strong> ${escapeHtml(name!)}</p>
-        <p><strong>Email:</strong> ${escapeHtml(email!)}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(phone || '-')}</p>
-        <hr style="border:none;border-top:1px solid #ddd;margin:12px 0" />
-        <p style="white-space:pre-wrap">${escapeHtml(message!)}</p>
+      <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5">
+        <h2>New contact message</h2>
+        <p><b>Name:</b> ${escapeHtml(name)}</p>
+        <p><b>Phone:</b> ${escapeHtml(phone)}</p>
+        <p><b>Email:</b> ${escapeHtml(email)}</p>
+        <p><b>Message:</b></p>
+        <pre style="white-space:pre-wrap">${escapeHtml(message)}</pre>
       </div>
-    `
+    `;
 
-    await transporter.sendMail({
-      from: `"Ohpal Website" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      text,
-      html,
-      replyTo: email, // so you can click Reply and it goes to the sender
-    })
+    await sendWithResend('admin@ohpalltd.com', 'Ohpal contact form', html);
 
-    return NextResponse.json({ ok: true })
-  } catch (err) {
-    console.error('CONTACT_API_ERROR', err)
-    return NextResponse.json(
-      { ok: false, error: 'Failed to send' },
-      { status: 500 }
-    )
+    return NextResponse.json({ ok: true });
+  } catch (e: any) {
+    // surface minimal info to client
+    return NextResponse.json({ ok: false, error: 'send_failed' }, { status: 500 });
   }
 }
 
-// tiny helper to avoid broken HTML if users paste special chars
 function escapeHtml(s: string) {
   return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 }
