@@ -1,80 +1,50 @@
 // examples/blog-starter/src/app/api/contact/route.ts
 import { NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
-export const runtime = 'nodejs';     // ensure Node runtime on Render
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-type Payload = {
-  name: string;
-  phone: string;
-  email: string;
-  message: string;
-};
-
-// We use a tiny inline call to Resend's REST API to avoid extra deps
-async function sendWithResend(to: string, subject: string, html: string) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) throw new Error('Missing RESEND_API_KEY');
-
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      // If your domain isn't verified yet, keep this sender for testing:
-      from: 'Ohpal <onboarding@resend.dev>',
-      to: [to],
-      subject,
-      html,
-    }),
-  });
-
-  if (!res.ok) {
-    const t = await res.text();
-    throw new Error(`Resend error: ${t}`);
-  }
-}
 
 export async function POST(req: Request) {
   try {
-    const data = (await req.json()) as Payload;
+    const { name, email, phone, message } = await req.json();
 
-    const name = (data.name || '').slice(0, 200);
-    const phone = (data.phone || '').slice(0, 80);
-    const email = (data.email || '').slice(0, 200);
-    const message = (data.message || '').slice(0, 2000);
-
-    if (!name || !phone || !email || !message) {
-      return NextResponse.json({ ok: false, error: 'Invalid payload' }, { status: 400 });
+    // Validate fields
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
     }
 
-    const html = `
-      <div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5">
-        <h2>New contact message</h2>
-        <p><b>Name:</b> ${escapeHtml(name)}</p>
-        <p><b>Phone:</b> ${escapeHtml(phone)}</p>
-        <p><b>Email:</b> ${escapeHtml(email)}</p>
-        <p><b>Message:</b></p>
-        <pre style="white-space:pre-wrap">${escapeHtml(message)}</pre>
-      </div>
-    `;
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
 
-    await sendWithResend('admin@ohpalltd.com', 'Ohpal contact form', html);
+    // Send the email
+    await transporter.sendMail({
+      from: `"Ohpal Contact Form" <${process.env.SMTP_USER}>`,
+      to: 'admin@ohpalltd.com',
+      subject: `New contact from ${name}`,
+      html: `
+        <h2>New Contact Submission</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
 
-    return NextResponse.json({ ok: true });
-  } catch (e: any) {
-    // surface minimal info to client
-    return NextResponse.json({ ok: false, error: 'send_failed' }, { status: 500 });
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 });
   }
 }
 
-function escapeHtml(s: string) {
-  return s
-    .replaceAll('&', '&amp;')
-    .replaceAll('<', '&lt;')
-    .replaceAll('>', '&gt;')
-    .replaceAll('"', '&quot;')
-    .replaceAll("'", '&#39;');
 }
