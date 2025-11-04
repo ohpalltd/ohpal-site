@@ -80,6 +80,9 @@ export default function AboutPage() {
           position: relative; min-height: 100vh; background: var(--bg); color: #fff; overflow-x: hidden;
         }
 
+        /* HIDE the global hero banner only on this page */
+        #global-hero { display: none !important; }
+
         /* small fixed Ohpal watermark centered */
         .aboutMain::before {
           content: "";
@@ -100,8 +103,7 @@ export default function AboutPage() {
         }
         .backArrow:hover { transform: translateX(-2px); background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
 
-        /* Hero removed for about page - no banner at top */
-        .hero { display: none !important; }
+        /* We removed the old .hero content on purpose */
 
         /* Story op-ed layout with side images */
         section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 1.25rem 1rem 2rem; }
@@ -193,7 +195,7 @@ export default function AboutPage() {
         </svg>
       </button>
 
-      {/* STORY (no top banner/header) */}
+      {/* STORY */}
       <section id="story" className="reveal">
         <h2 className="sectionTitle">Our story</h2>
         <p className="sectionLead">
