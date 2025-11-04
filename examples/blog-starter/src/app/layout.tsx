@@ -23,8 +23,9 @@ export default function RootLayout({
           backgroundColor: '#2b2b2b',
         }}
       >
-        {/* ===================== HERO ===================== */}
-        <header style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
+        {/* ===================== HERO (global) ===================== */}
+        {/* ADDED id="global-hero" so we can hide this on /about only */}
+        <header id="global-hero" style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
           <video
             key="hero-video"
             autoPlay
