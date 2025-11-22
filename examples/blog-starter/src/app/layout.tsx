@@ -16,7 +16,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const showHero = pathname === '/' || pathname === '';
+
+  // Only show the palm hero on the real home route
+  const showHero = pathname === '/';
 
   return (
     <html lang="en">
@@ -30,7 +32,13 @@ export default function RootLayout({
       >
         {/* ===================== HERO (home only) ===================== */}
         {showHero && (
-          <header style={{ position: 'relative', height: '85vh', overflow: 'hidden' }}>
+          <header
+            style={{
+              position: 'relative',
+              height: '85vh',
+              overflow: 'hidden',
+            }}
+          >
             <video
               key="hero-video"
               autoPlay
@@ -74,11 +82,25 @@ export default function RootLayout({
                 style={{ opacity: 0.95 }}
               />
 
-              <h1 style={{ fontSize: '4rem', lineHeight: 1.1, margin: '0.75rem 0 0.25rem' }}>
+              <h1
+                style={{
+                  fontSize: '4rem',
+                  lineHeight: 1.1,
+                  margin: '0.75rem 0 0.25rem',
+                }}
+              >
                 OHPAL
               </h1>
-              <h2 style={{ fontWeight: 400, margin: '0 0 0.75rem' }}>International Ltd</h2>
-              <p style={{ maxWidth: 780, margin: '0 0 1.25rem', fontSize: '1.05rem' }}>
+              <h2 style={{ fontWeight: 400, margin: '0 0 0.75rem' }}>
+                International Ltd
+              </h2>
+              <p
+                style={{
+                  maxWidth: 780,
+                  margin: '0 0 1.25rem',
+                  fontSize: '1.05rem',
+                }}
+              >
                 A seamless collaboration in Trade, Care and Culture.
               </p>
 
@@ -92,7 +114,7 @@ export default function RootLayout({
                   gap: '.6rem',
                 }}
               >
-                {/* Our Sects (scrolls to #about) */}
+                {/* Our Sects (scrolls to #about on the same page) */}
                 <a
                   href="#about"
                   style={{
@@ -106,11 +128,17 @@ export default function RootLayout({
                     background: '#fff',
                     textDecoration: 'none',
                     fontWeight: 600,
-                    transition: 'transform .2s ease, box-shadow .2s ease',
+                    transition:
+                      'transform .2s ease, box-shadow .2s ease',
                   }}
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document
+                      .getElementById('about')
+                      ?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                      });
                   }}
                 >
                   Our Sects
@@ -127,21 +155,27 @@ export default function RootLayout({
                     href={chip.href}
                     style={{
                       padding: '.5rem .9rem',
-                      border: '1px solid rgba(255,255,255,.28)',
+                      border:
+                        '1px solid rgba(255,255,255,.28)',
                       borderRadius: 999,
                       textDecoration: 'none',
                       color: '#fff',
-                      transition: 'transform .18s ease, background .18s ease, border-color .18s ease',
+                      transition:
+                        'transform .18s ease, background .18s ease, border-color .18s ease',
                     }}
                     onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'rgba(255,255,255,.08)';
-                      (e.currentTarget as HTMLElement).style.borderColor = '#fff';
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.transform = 'translateY(-2px)';
+                      el.style.backgroundColor =
+                        'rgba(255,255,255,.08)';
+                      el.style.borderColor = '#fff';
                     }}
                     onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-                      (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent';
-                      (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,.28)';
+                      const el = e.currentTarget as HTMLElement;
+                      el.style.transform = 'translateY(0)';
+                      el.style.backgroundColor = 'transparent';
+                      el.style.borderColor =
+                        'rgba(255,255,255,.28)';
                     }}
                   >
                     {chip.label}
@@ -153,7 +187,10 @@ export default function RootLayout({
         )}
 
         {/* ===================== MAIN CONTENT ===================== */}
-        <main id="about" style={{ background: '#f7f7f7', color: '#111' }}>
+        <main
+          id="about"
+          style={{ background: '#0a0a0a', color: '#111' }}
+        >
           {children}
         </main>
       </body>
